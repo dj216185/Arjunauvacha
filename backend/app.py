@@ -7,11 +7,9 @@ from pathlib import Path
 from werkzeug.utils import secure_filename
 
 BASE_DIR = Path(__file__).parent
-# Store DB and uploads inside the bundled backend directory
-DB_PATH = BASE_DIR / 'backend' / 'data.db'
-UPLOAD_DIR = BASE_DIR / 'backend' / 'uploads'
-# Frontend lives in this folder
-FRONTEND_DIR = BASE_DIR
+DB_PATH = BASE_DIR / 'data.db'
+UPLOAD_DIR = BASE_DIR / 'uploads'
+FRONTEND_DIR = BASE_DIR.parent
 FRONTEND_STATIC_DIR = FRONTEND_DIR / 'static'
 ADMIN_TOKEN = os.getenv('ADMIN_TOKEN', 'change-me')
 
@@ -53,7 +51,7 @@ def init_db():
     conn.commit()
     conn.close()
 
-# Initialize DB at import time (Flask 3.x safe)
+# Initialize DB at import time
 with app.app_context():
     init_db()
 
@@ -129,7 +127,6 @@ def upload_image():
     final_name = f"{ts}{ext}"
     save_path = UPLOAD_DIR / final_name
     f.save(save_path)
-    # Absolute URL for the browser
     url = request.host_url.rstrip('/') + f"/uploads/{final_name}"
     return jsonify({"url": url})
 
@@ -141,7 +138,6 @@ def uploads(filename: str):
 
 @app.get('/static/<path:filename>')
 def static_files(filename: str):
-    # Serve frontend static assets
     return send_from_directory(FRONTEND_STATIC_DIR, filename)
 
 @app.get('/')
