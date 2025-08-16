@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arjunauvacha</title>
+    <!-- Google Fonts for a serene look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/main.css">
+    <style>
+        /* --- CSS Variables for colors and glow effects --- */
+        :root {
+            --primary-orange: #FF6B35;
+            --deep-orange: #E55722;
+            --kesari: #FF8C00;
+            --light-kesari: #FFB84D;
+            --dark-orange: #CC4125;
+            --white: #FFFFFF;
+            --cream: #FFF8E1;
+            --gold: #FFD700;
+
+            /* Glow Effect Colors */
+            --glow-1: #FF8C00;
+            --glow-2: #E55722;
+        }
+
+        /* Base Body & Font Styling */
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, var(--cream) 0%, #FFF3E0 50%, #FFECB3 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Custom Modal/Message Box --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: var(--cream);
+            padding: 30px;
+            border: 2px solid var(--kesari);
+            border-radius: 15px;
+            max-width: 90%;
+            width: 400px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .modal-title {
+            font-size: 1.8rem;
+            color: var(--deep-orange);
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        .modal-body {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        .modal-button {
+            background-color: var(--deep-orange);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .modal-button:hover {
+            background-color: var(--dark-orange);
+            transform: scale(1.05);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Navigation --- */
+        .navbar {
+            background: rgba(229, 87, 34, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 1rem 2rem;
+            box-shadow: 0 8px 32px rgba(229, 87, 34, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            font-family: 'Tangerine', cursive;
+        }
+        .logo::before {
+            content: "🕉️";
+            margin-right: 0.5rem;
+            font-size: 2rem;
+        }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        .nav-item a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        .nav-item a:hover {
+            color: var(--gold);
+        }
+        .nav-item a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+        .nav-item a:hover::after {
+            width: 100%;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            padding: 4rem 2rem 2rem;
+        }
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: url('https://placehold.co/1920x1080/FF6600/FFFFFF?text=Divine+Serenity') no-repeat center center/cover;
+            background-attachment: fixed;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(to bottom, transparent, var(--deep-orange));
+            opacity: 0.7;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            color: var(--white);
+            padding: 3rem;
+            border-radius: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+        .hero-content h1 {
+            font-family: 'Tangerine', cursive;
+            font-size: 4rem;
+            color: var(--white);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 1rem;
+        }
+        /* Sanskrit-styled brand title */
+        .brand-title {
+            font-family: 'Tiro Devanagari Sanskrit', 'Noto Serif Devanagari', serif;
+            font-size: 3.2rem;
+            letter-spacing: 0.02em;
+            color: var(--white);
+            text-shadow: 0 0 10px rgba(255,140,0,0.35), 0 0 20px rgba(229,87,34,0.2);
+            margin-bottom: 0.25rem;
+        }
+        .brand-title .brand-om {
+            font-size: 0.9em;
+            margin: 0 0.3em;
+        }
+        .brand-subtitle {
+            font-family: 'Montserrat Alternates', 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.9);
+            letter-spacing: 0.06em;
+            text-transform: none;
+            margin-bottom: 0.75rem;
+        }
+        .hero-content .sanskrit-text, .hero-content .hindi-text, .hero-content .english-text {
+            color: var(--white);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+            font-weight: 500;
+        }
+        .hero-content .sanskrit-text {
+            font-size: 1.5rem;
+            font-family: 'Times New Roman', serif;
+        }
+        .hero-content .hindi-text {
+            font-size: 1.2rem;
+        }
+        .hero-content .english-text {
+            font-size: 1.1rem;
+        }
+        .cta-buttons {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .cta-btn {
+            background: var(--white);
+            color: var(--deep-orange);
+            padding: 1rem 2.5rem;
+            border: 1px solid var(--white);
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-btn:hover {
+            background: var(--deep-orange);
+            color: var(--white);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        .cta-btn.secondary {
+            background: rgba(255, 215, 0, 0.9);
+            color: var(--white);
+        }
+        .cta-btn.secondary:hover {
+            background: rgba(255, 140, 0, 0.95);
+        }
+
+        /* --- Sections --- */
+        .section-container {
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--deep-orange);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+            font-family: 'Tangerine', cursive;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--kesari), var(--deep-orange));
+            border-radius: 2px;
+        }
+
+        /* About & Programs Sections */
+        .about-content, .program-grid, .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 2.5rem;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(229, 87, 34, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+        }
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(229, 87, 34, 0.2);
+            background: rgba(255, 255, 255, 0.25);
+        }
+        .card h3 {
+            color: var(--kesari);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Ensure the Community Service card is truly centered */
+        .program-grid .center-card {
+            grid-column: 1 / -1;
+            justify-self: center;
+            max-width: 560px;
+        }
+
+        /* Gallery Section Specifics */
+        .gallery-grid {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+        .gallery-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .gallery-card:hover {
+            transform: scale(1.05);
+        }
+        .gallery-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .gallery-caption {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Divine Verse Section */
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--deep-orange);
+            border-top: 4px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, rgba(229, 87, 34, 0.9), rgba(255, 140, 0, 0.9));
+            color: var(--white);
+        }
+        .contact .section-title {
+            color: var(--white);
+        }
+        .contact .section-title::after {
+            background: var(--gold);
+        }
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        .contact-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            padding: 1.3rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        .contact-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--deep-orange);
+            color: var(--white);
+            text-align: center;
+            padding: 2.5rem;
+        }
+
+        /* --- Mobile Styles --- */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: rgba(229, 87, 34, 0.95);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0,0,0,0.3);
+                padding: 2rem 0;
+                gap: 1rem;
+            }
+            .nav-menu.active {
+                left: 0;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .hamburger.active span:nth-child(2) { opacity: 0; }
+            .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+            .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+            .hero h1 { font-size: 2rem; }
+            .sanskrit-text { font-size: 1.2rem; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .contact-links { flex-direction: column; align-items: center; }
+        }
+        
+        /* --- Animations --- */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes text-glow {
+            from { text-shadow: 0 0 5px var(--glow-1), 0 0 10px var(--glow-1); }
+            to { text-shadow: 0 0 10px var(--glow-2), 0 0 20px var(--glow-2); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Modal Container for Messages -->
+    <div id="modal-container" class="modal">
+        <div class="modal-content">
+            <h3 id="modal-title" class="modal-title"></h3>
+            <p id="modal-body" class="modal-body"></p>
+            <button id="modal-close-btn" class="modal-button">Close</button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Arjunauvacha</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#home">Home</a></li>
+                <li class="nav-item"><a href="#about">About</a></li>
+                <li class="nav-item"><a href="#programs">Programs</a></li>
+                <li class="nav-item"><a href="#sessions">Sessions</a></li>
+                <li class="nav-item"><a href="#showcase">Showcase</a></li>
+                
+                <li class="nav-item"><a href="#contact">Contact</a></li>
+                <li class="nav-item"><a href="#" id="login-link">Login</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background"></div>
+        <div class="hero-overlay"></div>
+    <div class="hero-sanskrit">दिव्य शान्ति</div>
+        <div class="hero-content">
+            <h1 class="brand-title"><span class="brand-om">ॐ</span> अर्जुन उवाच <span class="brand-om">ॐ</span></h1>
+            <div class="brand-subtitle">Arjunauvacha</div>
+            <div class="sanskrit-text">
+                श्रीमद्भगवद्गीता ज्ञानम्
+            </div>
+            <div class="hindi-text">
+                भगवद्गीता के पवित्र ज्ञान को समझते और बांटते हैं
+            </div>
+            <div class="english-text">
+                "Join our devoted community in studying and spreading the eternal wisdom of Bhagavad Gita. Together, we explore the divine teachings of Lord Krishna and apply them in our daily lives for spiritual growth and inner peace."
+            </div>
+            <div class="cta-buttons">
+                <button class="cta-btn" onclick="joinCommunity()">🤝 Join Our Community</button>
+                <a href="#programs" class="cta-btn secondary">📚 Explore Programs</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-container">
+        <div class="container">
+            <h2 class="section-title">About Our Community</h2>
+            <div class="about-content">
+                <div class="card">
+                    <h3>🎯 Our Mission</h3>
+                    <p>To create a loving community where devotees come together to study the Bhagavad Gita, understand Krishna's divine teachings, and support each other's spiritual journey towards self-realization and devotion.</p>
+                </div>
+                <div class="card">
+                    <h3>📖 What We Study</h3>
+                    <p>We dive deep into the verses of Bhagavad Gita, exploring their meanings in Sanskrit, Hindi, and English. Our discussions help members apply these timeless teachings in modern life situations.</p>
+                </div>
+                <div class="card">
+                    <h3>🌟 Our Values</h3>
+                    <p>Devotion (Bhakti), Knowledge (Jnana), Service (Seva), and Community (Sangha) form the foundation of our spiritual practice and interactions with fellow devotees.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section id="programs" class="section-container programs-bg">
+        <div class="container">
+            <h2 class="section-title">Our Programs</h2>
+            <div class="program-grid">
+                <div class="card">
+                    <h3>Daily Gita Study Circle</h3>
+                    <p>Join our daily sessions where we read, discuss, and contemplate verses from the Bhagavad Gita. Perfect for beginners and advanced students alike.</p>
+                </div>
+                <div class="card">
+                    <h3>Bhajan & Kirtan Sessions</h3>
+                    <p>Experience the joy of devotional singing with our weekly bhajan and kirtan programs. Let your heart sing in praise of Lord Krishna.</p>
+                </div>
+                <div class="card">
+                    <h3>Meditation & Dharana</h3>
+                    <p>Learn ancient meditation techniques mentioned in the Gita. Develop concentration and inner peace through guided meditation sessions.</p>
+                </div>
+                <div class="card center-card">
+                    <h3>Community Service</h3>
+                    <p>Practice Karma Yoga through community service projects. Serve society while growing spiritually through selfless action.</p>
+                </div>
+                <!-- center this card visually -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Showcase Section -->
+    <section id="showcase" class="section-container">
+        <div class="container">
+            <h2 class="section-title">Our Divine Showcase</h2>
+            <p class="showcase-desc">
+                A glimpse into our community events and spiritual gatherings. These moments capture the joy, devotion, and unity we share.
+            </p>
+            <div id="admin-controls">
+                <button class="cta-btn" onclick="openAdminModal()">Manage Gallery (Admin)</button>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-card">
+                    <img src="static/images/community_gathering.svg" alt="Community Gathering">
+                    <div class="gallery-caption">Community Gathering</div>
+                </div>
+                <div class="gallery-card">
+                    <img src="static/images/gita_study_session_1.svg" alt="Gita Study Session">
+                    <div class="gallery-caption">Gita Study Session</div>
+                </div>
+                <div class="gallery-card">
+                    <img src="static/images/gita_study_session_2.svg" alt="Gita Study Session">
+                    <div class="gallery-caption">Gita Study Session</div>
+                </div>
+                <div class="gallery-card">
+                    <img src="static/images/kirtan_night_1.svg" alt="Kirtan Night">
+                    <div class="gallery-caption">Kirtan Night</div>
+                </div>
+                <div class="gallery-card">
+                    <img src="static/images/kirtan_night_2.svg" alt="Kirtan Night">
+                    <div class="gallery-caption">Kirtan Night</div>
+                </div>
+                <div class="gallery-card">
+                    <img src="static/images/meditation_workshop_1.svg" alt="Meditation Workshop">
+                    <div class="gallery-caption">Meditation Workshop</div>
+                </div>
+                <div class="gallery-card">
+                    <img src="static/images/meditation_workshop_2.svg" alt="Meditation Workshop">
+                    <div class="gallery-caption">Meditation Workshop</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Modal (client-side only) -->
+    <div id="admin-modal" class="modal">
+        <div class="modal-content admin-modal-content">
+            <div id="admin-login-section">
+                <h3 class="modal-title">Admin Login</h3>
+                <form id="admin-login-form">
+                    <div class="admin-form-group">
+                        <label>Username</label>
+                        <input name="username" type="text" required />
+                        <label>Password</label>
+                        <input name="password" type="password" required />
+                        <div class="admin-error"></div>
+                        <div class="admin-form-actions">
+                            <button type="submit" class="cta-btn">Login</button>
+                            <button type="button" class="cta-btn" onclick="closeAdminModal()">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+                <p class="modal-note">Default admin (client-side) credentials: <strong>admin / admin123</strong>.</p>
+            </div>
+
+            <div id="admin-tools-section" class="admin-only">
+                <hr />
+                <h4>Add Event Photo</h4>
+                <form id="admin-add-form">
+                    <div class="admin-form-group">
+                        <label>Image URL (CDN)</label>
+                        <input name="imageUrl" type="url" placeholder="https://cdn.example.com/photo.jpg" />
+                        <label>Caption</label>
+                        <input name="caption" type="text" placeholder="Event caption" />
+                        <div class="admin-form-actions">
+                            <button type="submit" class="cta-btn">Add Photo</button>
+                        </div>
+                    </div>
+                </form>
+                <hr />
+                <h4>Add Event (Admin)</h4>
+                <form id="admin-event-form">
+                    <div class="admin-form-group">
+                        <label>Event Title</label>
+                        <input name="title" type="text" placeholder="Community Gathering" />
+                        <label>Date & Time (ISO)</label>
+                        <input name="datetime" type="datetime-local" />
+                        <label>Join URL (meeting link)</label>
+                        <input name="joinUrl" type="url" placeholder="https://zoom.example/..." />
+                        <div class="admin-form-actions">
+                            <button type="submit" class="cta-btn">Add Event</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <!-- Sessions Section -->
+    <section id="sessions" class="section-container">
+        <div class="container">
+            <h2 class="section-title">Upcoming Sessions</h2>
+            <div class="about-content">
+                <div class="card">
+                    <h3>🗓️ Scheduled Programs</h3>
+                    <p>This is where our **dynamic schedule** will appear. For now, check back later for updates!</p>
+                    <div id="events-list"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-container contact">
+        <div class="container">
+            <h2 class="section-title">Connect With Us</h2>
+            <div class="contact-content">
+                <p>Join our growing family of Krishna devotees and embark on a transformative spiritual journey together.</p>
+                <div class="contact-links">
+                    <a href="https://www.youtube.com/@Arjunauvacha_Om" target="_blank" rel="noopener noreferrer" class="contact-btn">
+                        📺 YouTube Channel
+                    </a>
+                    <a href="https://chat.whatsapp.com/Cuy38GIN4HbHIby9SzUSwn" target="_blank" rel="noopener noreferrer" class="contact-btn">
+                        💬 WhatsApp Community
+                    </a>
+                    <a href="mailto:adhayageeta@gmail.com" class="contact-btn">
+                        📧 Email Us
+                    </a>
+                </div>
+                <p class="contact-quote">
+                    "सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज"<br>
+                    <small>Join us in surrendering to the divine wisdom of Lord Krishna</small>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Shree Krishna Disciples Community. All rights reserved.</p>
+        <p>🕉️ May Lord Krishna's blessings be with you always 🕉️</p>
+    </footer>
+
+    <script src="static/js/main.js"></script>
+</body>
+</html>
