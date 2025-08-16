@@ -543,13 +543,13 @@
         </div>
         
         <!-- Mobile Offcanvas Menu -->
-        <div class="offcanvas offcanvas-end w-100" tabindex="-1" id="offcanvasNavbar" style="background: linear-gradient(135deg, rgba(229, 87, 34, 0.95), rgba(255, 140, 0, 0.95)); backdrop-filter: blur(40px) saturate(180%); -webkit-backdrop-filter: blur(40px) saturate(180%);">
-            <div class="offcanvas-header border-bottom border-opacity-25 pb-3" style="border-color: rgba(255, 255, 255, 0.2) !important; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px);">
+        <div class="offcanvas offcanvas-end w-100" tabindex="-1" id="offcanvasNavbar">
+            <div class="offcanvas-header border-bottom border-opacity-25 pb-3">
                 <h5 class="offcanvas-title text-white d-flex align-items-center">
-                    <span class="me-2" style="font-size: 1.5rem;">🕉️</span>
-                    <span style="font-family: 'Tiro Devanagari Sanskrit', serif;">अर्जुन उवाच</span>
+                    <span class="me-2 brand-om">🕉️</span>
+                    <span class="brand-title-nav">अर्जुन उवाच</span>
                 </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close" style="backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.1); border-radius: 50%; padding: 0.5rem;"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-start flex-grow-1">
@@ -590,43 +590,12 @@
                         </a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a class="nav-link text-white d-flex align-items-center py-3 px-3 rounded-3 hover-bg" href="#" id="login-link-mobile">
+                        <a class="nav-link text-white d-flex align-items-center py-3 px-3 rounded-3 hover-bg" href="#" id="login-link-mobile" data-bs-dismiss="offcanvas">
                             <i class="bi bi-person-circle me-3 fs-5"></i>
                             <span class="fw-500 fs-6">Admin Login</span>
                         </a>
                     </li>
                 </ul>
-                
-                <!-- Additional Features Section -->
-                <div class="mt-4 pt-4 border-top border-light border-opacity-25">
-                    <h6 class="text-white-50 mb-3 text-uppercase small fw-bold">Features</h6>
-                    <ul class="navbar-nav">
-                        <li class="nav-item mb-2">
-                            <a class="nav-link text-white d-flex align-items-center py-2 px-3 rounded-3 hover-bg" href="#programs" data-bs-dismiss="offcanvas">
-                                <i class="bi bi-journal-bookmark me-3"></i>
-                                <span class="small">Daily Gita Study Circle</span>
-                            </a>
-                        </li>
-                        <li class="nav-item mb-2">
-                            <a class="nav-link text-white d-flex align-items-center py-2 px-3 rounded-3 hover-bg" href="#programs" data-bs-dismiss="offcanvas">
-                                <i class="bi bi-music-note-beamed me-3"></i>
-                                <span class="small">Bhajan & Kirtan Sessions</span>
-                            </a>
-                        </li>
-                        <li class="nav-item mb-2">
-                            <a class="nav-link text-white d-flex align-items-center py-2 px-3 rounded-3 hover-bg" href="#programs" data-bs-dismiss="offcanvas">
-                                <i class="bi bi-peace me-3"></i>
-                                <span class="small">Meditation & Dharana</span>
-                            </a>
-                        </li>
-                        <li class="nav-item mb-2">
-                            <a class="nav-link text-white d-flex align-items-center py-2 px-3 rounded-3 hover-bg" href="#programs" data-bs-dismiss="offcanvas">
-                                <i class="bi bi-heart-fill me-3"></i>
-                                <span class="small">Community Service</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
                 
                 <!-- Quick Contact in Mobile Menu -->
                 <div class="mt-4 pt-4 border-top border-light border-opacity-25">
@@ -700,7 +669,7 @@
         <div class="container py-4">
             <div class="row justify-content-center mb-5">
                 <div class="col-12 text-center">
-                    <h2 class="section-title display-4 text-center mb-4" style="font-family: 'Tangerine', cursive; color: var(--deep-orange);">About Our Community</h2>
+                    <h2 class="section-title display-4 text-center mb-4">About Our Community</h2>
                     <div class="title-underline mx-auto"></div>
                 </div>
             </div>
@@ -949,6 +918,7 @@
         <p>🕉️ May Lord Krishna's blessings be with you always 🕉️</p>
     </footer>
 
+    <script src="static/js/config.js"></script>
     <script src="static/js/main.js"></script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

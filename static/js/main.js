@@ -38,14 +38,34 @@ document.querySelectorAll('.nav-item a').forEach(n => n.addEventListener('click'
     if (navMenu) navMenu.classList.remove('active');
 }));
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    });
+function scrollToTarget(target) {
+    const navbar = document.querySelector('.navbar');
+    const offset = navbar ? navbar.offsetHeight + 8 : 0;
+    const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+}
+
+// Delegated handler for all in-page nav links (works inside offcanvas)
+document.addEventListener('click', (e) => {
+    const link = e.target && e.target.closest ? e.target.closest('a[href^="#"]') : null;
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (!href || href === '#' || href === '#!') return; // ignore placeholders
+    const target = document.querySelector(href);
+    if (!target) return;
+    e.preventDefault();
+    const offcanvasEl = link.closest && link.closest('#offcanvasNavbar') ? document.getElementById('offcanvasNavbar') : null;
+    if (offcanvasEl && typeof bootstrap !== 'undefined') {
+        const oc = bootstrap.Offcanvas.getInstance(offcanvasEl) || new bootstrap.Offcanvas(offcanvasEl);
+        const onHidden = () => {
+            scrollToTarget(target);
+            offcanvasEl.removeEventListener('hidden.bs.offcanvas', onHidden);
+        };
+        offcanvasEl.addEventListener('hidden.bs.offcanvas', onHidden, { once: true });
+        oc.hide();
+    } else {
+        scrollToTarget(target);
+    }
 });
 
 // Modern navbar scroll effect
@@ -108,6 +128,40 @@ function getStaticBase() {
 }
 const STATIC_BASE = getStaticBase();
 
+// --- Optional remote storage adapter (API mode) ---
+function remoteEnabled() {
+    try {
+        return window.AppConfig && window.AppConfig.REMOTE_BACKEND === 'api' && window.AppConfig.api && window.AppConfig.api.baseUrl;
+    } catch (_) { return false; }
+}
+
+async function remoteFetch(kind) {
+    if (!remoteEnabled()) return null;
+    const base = window.AppConfig.api.baseUrl.replace(/\/$/, '');
+    try {
+        const res = await fetch(`${base}/${kind}`, { headers: { 'Accept': 'application/json' } });
+        if (!res.ok) return null;
+        const data = await res.json();
+        return Array.isArray(data) ? data : null;
+    } catch (_) { return null; }
+}
+
+async function remotePush(kind, list) {
+    if (!remoteEnabled()) return false;
+    const base = window.AppConfig.api.baseUrl.replace(/\/$/, '');
+    try {
+        const headers = { 'Content-Type': 'application/json' };
+        const token = window.AppConfig.api.adminToken;
+        if (token) headers['x-admin-token'] = token;
+        await fetch(`${base}/${kind}`, {
+            method: 'PUT',
+            headers,
+            body: JSON.stringify(list || [])
+        });
+        return true;
+    } catch (_) { return false; }
+}
+
 // Default gallery items (fallback)
 const defaultGallery = [
     { src: `${STATIC_BASE}community_gathering.svg`, caption: 'Community Gathering' },
@@ -135,6 +189,8 @@ function saveGalleryItems(items) {
         console.warn('Failed to save gallery items', e);
         showModal('Storage full', 'Could not save image due to storage limits. Try a smaller image or remove some items.');
     }
+    // Best-effort remote sync
+    remotePush('gallery', items);
 }
 
 function renderGallery() {
@@ -251,6 +307,14 @@ function handleLogoutClick(e) {
 function openAdminModal() {
     const am = document.getElementById('admin-modal');
     if (!am) return;
+    // If opened from offcanvas, ensure the offcanvas is closed
+    try {
+        const ocEl = document.getElementById('offcanvasNavbar');
+        if (ocEl && typeof bootstrap !== 'undefined') {
+            const oc = bootstrap.Offcanvas.getInstance(ocEl) || new bootstrap.Offcanvas(ocEl);
+            oc.hide();
+        }
+    } catch (e) { /* ignore */ }
     // Toggle visible sections based on admin state
     const loginSec = document.getElementById('admin-login-section');
     const toolsSec = document.getElementById('admin-tools-section');
@@ -361,7 +425,7 @@ if (adminAddForm) {
         dropzone.addEventListener('drop', (e) => { handleFiles(e.dataTransfer.files); });
     }
 
-    adminAddForm.addEventListener('submit', (ev) => {
+    adminAddForm.addEventListener('submit', async (ev) => {
         ev.preventDefault();
         if (!isAdmin()) return; // block non-admin
         const cap = adminAddForm.querySelector('input[name="caption"]').value.trim();
@@ -370,7 +434,29 @@ if (adminAddForm) {
         if (err) err.textContent = '';
 
         if (localImageDataUrl) {
-            finalSrc = localImageDataUrl; // use local uploaded image
+            // If API backend is enabled, upload the image and use the returned URL
+            if (remoteEnabled()) {
+                try {
+                    // Convert dataURL to Blob
+                    const blob = await (await fetch(localImageDataUrl)).blob();
+                    const form = new FormData();
+                    const filename = `upload_${Date.now()}.jpg`;
+                    form.append('file', new File([blob], filename, { type: blob.type || 'image/jpeg' }));
+                    const base = window.AppConfig.api.baseUrl.replace(/\/$/, '');
+                    const headers = {};
+                    const token = window.AppConfig.api.adminToken;
+                    if (token) headers['x-admin-token'] = token;
+                    const res = await fetch(`${base}/upload`, { method: 'POST', body: form, headers });
+                    if (!res.ok) throw new Error('Upload failed');
+                    const { url } = await res.json();
+                    finalSrc = url;
+                } catch (e) {
+                    console.warn('Upload failed, falling back to data URL', e);
+                    finalSrc = localImageDataUrl;
+                }
+            } else {
+                finalSrc = localImageDataUrl; // use data URL locally
+            }
         } else {
             if (err) err.textContent = 'Please upload an image from this device.';
             return;
@@ -403,6 +489,8 @@ function getEvents() {
 
 function saveEvents(list) {
     localStorage.setItem('events', JSON.stringify(list));
+    // Best-effort remote sync
+    remotePush('events', list);
 }
 
 function renderEvents() {
@@ -474,6 +562,15 @@ document.addEventListener('DOMContentLoaded', () => {
     renderGallery();
     renderEvents();
     updateAdminUI();
+    // Try to hydrate from remote on first load, then re-render
+    (async () => {
+        if (!remoteEnabled()) return;
+        const [g, e] = await Promise.all([remoteFetch('gallery'), remoteFetch('events')]);
+        let did = false;
+        if (Array.isArray(g) && g.length) { saveGalleryItems(g); did = true; }
+        if (Array.isArray(e) && e.length) { saveEvents(e); did = true; }
+        if (did) { renderGallery(); renderEvents(); }
+    })();
 });
 
 // Close admin modal when clicking outside
