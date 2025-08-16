@@ -81,15 +81,30 @@ const loginLink = document.getElementById('login-link');
 
 // --- Admin / Showcase Management ---
 
+// Resolve static images base regardless of subpath (e.g., Vercel deployments)
+function getStaticBase() {
+    try {
+        const scripts = document.getElementsByTagName('script');
+        for (let i = scripts.length - 1; i >= 0; i--) {
+            const src = scripts[i].src || '';
+            if (src.includes('/static/js/main.js')) {
+                return src.replace('/static/js/main.js', '/static/images/');
+            }
+        }
+    } catch (e) { /* ignore */ }
+    return 'static/images/';
+}
+const STATIC_BASE = getStaticBase();
+
 // Default gallery items (fallback)
 const defaultGallery = [
-    { src: 'static/images/community_gathering.svg', caption: 'Community Gathering' },
-    { src: 'static/images/gita_study_session_1.svg', caption: 'Gita Study Session' },
-    { src: 'static/images/gita_study_session_2.svg', caption: 'Gita Study Session' },
-    { src: 'static/images/kirtan_night_1.svg', caption: 'Kirtan Night' },
-    { src: 'static/images/kirtan_night_2.svg', caption: 'Kirtan Night' },
-    { src: 'static/images/meditation_workshop_1.svg', caption: 'Meditation Workshop' },
-    { src: 'static/images/meditation_workshop_2.svg', caption: 'Meditation Workshop' }
+    { src: `${STATIC_BASE}community_gathering.svg`, caption: 'Community Gathering' },
+    { src: `${STATIC_BASE}gita_study_session_1.svg`, caption: 'Gita Study Session' },
+    { src: `${STATIC_BASE}gita_study_session_2.svg`, caption: 'Gita Study Session' },
+    { src: `${STATIC_BASE}kirtan_night_1.svg`, caption: 'Kirtan Night' },
+    { src: `${STATIC_BASE}kirtan_night_2.svg`, caption: 'Kirtan Night' },
+    { src: `${STATIC_BASE}meditation_workshop_1.svg`, caption: 'Meditation Workshop' },
+    { src: `${STATIC_BASE}meditation_workshop_2.svg`, caption: 'Meditation Workshop' }
 ];
 
 function getGalleryItems() {
@@ -102,7 +117,12 @@ function getGalleryItems() {
 }
 
 function saveGalleryItems(items) {
-    localStorage.setItem('galleryItems', JSON.stringify(items));
+    try {
+        localStorage.setItem('galleryItems', JSON.stringify(items));
+    } catch (e) {
+        console.warn('Failed to save gallery items', e);
+        showModal('Storage full', 'Could not save image due to storage limits. Try a smaller image or remove some items.');
+    }
 }
 
 function renderGallery() {
@@ -117,6 +137,11 @@ function renderGallery() {
         const img = document.createElement('img');
         img.src = it.src;
         img.alt = it.caption || `Event ${idx+1}`;
+        // Fallback if the image fails to load
+        img.onerror = () => {
+            img.onerror = null;
+            img.src = `${STATIC_BASE}community_gathering.svg`;
+        };
         card.appendChild(img);
 
         const cap = document.createElement('div');
@@ -170,6 +195,7 @@ function updateAdminUI() {
     const loginLink = document.getElementById('login-link');
     const loginSec = document.getElementById('admin-login-section');
     const toolsSec = document.getElementById('admin-tools-section');
+    const sessionsAdmin = document.getElementById('admin-events-controls');
     if (isAdmin()) {
         if (adminControls) adminControls.style.display = 'block';
         if (loginLink) {
@@ -178,6 +204,7 @@ function updateAdminUI() {
         }
         if (loginSec) loginSec.style.display = 'none';
         if (toolsSec) toolsSec.style.display = 'block';
+        if (sessionsAdmin) sessionsAdmin.style.display = 'block';
     } else {
         if (adminControls) adminControls.style.display = 'none';
         if (loginLink) {
@@ -186,6 +213,7 @@ function updateAdminUI() {
         }
         if (loginSec) loginSec.style.display = 'block';
         if (toolsSec) toolsSec.style.display = 'none';
+        if (sessionsAdmin) sessionsAdmin.style.display = 'none';
     }
     renderGallery();
 }
@@ -234,7 +262,7 @@ if (adminForm) {
         if (validateCredentials(u, p)) {
             setAdminState(true);
             closeAdminModal();
-            showModal('Welcome back, Admin', 'You are now logged in. Use Manage Gallery to add event photos from your CDN.');
+            showModal('Welcome back, Admin', 'You are now logged in. Use Manage Gallery to add event photos from your device.');
         } else {
             const err = adminForm.querySelector('.admin-error');
             if (err) err.textContent = 'Invalid username or password.';
@@ -245,16 +273,92 @@ if (adminForm) {
 // Admin add form
 const adminAddForm = document.getElementById('admin-add-form');
 if (adminAddForm) {
+    // Local image selection state
+    let localImageDataUrl = '';
+
+    // Helpers: read image, resize for reasonable size, and return data URL
+    const MAX_W = 1280; // slightly smaller to reduce storage size
+    const MAX_H = 960;
+    function fileToDataUrlResized(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onerror = reject;
+            reader.onload = () => {
+                const img = new Image();
+                img.onload = () => {
+                    let { width, height } = img;
+                    let scale = Math.min(MAX_W / width, MAX_H / height, 1);
+                    const canvas = document.createElement('canvas');
+                    canvas.width = Math.round(width * scale);
+                    canvas.height = Math.round(height * scale);
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    // Use JPEG for better size, fallback to PNG if transparency likely isn't needed
+                    try {
+                        const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+                        resolve(dataUrl);
+                    } catch (e) {
+                        try { resolve(canvas.toDataURL()); } catch (e2) { reject(e2); }
+                    }
+                };
+                img.onerror = reject;
+                img.src = reader.result;
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
+    // Wire dropzone + hidden input
+    const dropzone = document.getElementById('local-dropzone');
+    const fileInput = document.getElementById('local-file-input');
+    const preview = document.getElementById('local-upload-preview');
+    if (dropzone && fileInput && preview) {
+        const handleFiles = async (files) => {
+            const file = files && files[0];
+            if (!file) return;
+            try {
+                const dataUrl = await fileToDataUrlResized(file);
+                localImageDataUrl = dataUrl;
+                preview.innerHTML = `<img src="${dataUrl}" alt="Preview" />`;
+                // Clear URL field since local image takes precedence
+                const urlInput = adminAddForm.querySelector('input[name="imageUrl"]');
+                if (urlInput) urlInput.value = '';
+            } catch (err) {
+                localImageDataUrl = '';
+                preview.textContent = 'Failed to load image.';
+            }
+        };
+
+        dropzone.addEventListener('click', () => fileInput.click());
+        dropzone.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click(); } });
+        fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
+        ['dragenter','dragover'].forEach(ev => dropzone.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); dropzone.classList.add('dragover'); }));
+        ['dragleave','drop'].forEach(ev => dropzone.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); dropzone.classList.remove('dragover'); }));
+        dropzone.addEventListener('drop', (e) => { handleFiles(e.dataTransfer.files); });
+    }
+
     adminAddForm.addEventListener('submit', (ev) => {
         ev.preventDefault();
         if (!isAdmin()) return; // block non-admin
-        const url = adminAddForm.querySelector('input[name="imageUrl"]').value.trim();
         const cap = adminAddForm.querySelector('input[name="caption"]').value.trim();
-        if (!url) return;
+        let finalSrc = '';
+        const err = adminAddForm.querySelector('.admin-error');
+        if (err) err.textContent = '';
+
+        if (localImageDataUrl) {
+            finalSrc = localImageDataUrl; // use local uploaded image
+        } else {
+            if (err) err.textContent = 'Please upload an image from this device.';
+            return;
+        }
+
         const items = getGalleryItems();
-        items.unshift({ src: url, caption: cap });
+        items.unshift({ src: finalSrc, caption: cap });
         saveGalleryItems(items);
         adminAddForm.reset();
+        if (preview) preview.innerHTML = '';
+        localImageDataUrl = '';
+        if (err) err.textContent = '';
         renderGallery();
     });
 }
