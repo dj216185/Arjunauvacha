@@ -137,6 +137,8 @@ function renderGallery() {
         const img = document.createElement('img');
         img.src = it.src;
         img.alt = it.caption || `Event ${idx+1}`;
+    img.loading = 'lazy';
+    img.decoding = 'async';
         // Fallback if the image fails to load
         img.onerror = () => {
             img.onerror = null;
