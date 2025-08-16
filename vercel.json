@@ -1,12 +1,5 @@
 {
   "version": 2,
-  "functions": {
-    "api/app.py": {
-      "runtime": "@vercel/python@1.1.1",
-      "maxDuration": 10,
-      "memory": 1024
-    }
-  },
   "routes": [
     { "src": "^/(api|uploads)(/.*)?$", "dest": "api/app.py" },
     { "src": "^/static/(.*)$", "dest": "static/$1" },
