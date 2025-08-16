@@ -15,6 +15,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
     <link rel="stylesheet" href="static/css/main.css">
     <style>
         /* --- CSS Variables for colors and glow effects --- */
@@ -503,95 +511,250 @@
         </div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">Arjunauvacha</a>
-            <ul class="nav-menu">
-                <li class="nav-item"><a href="#home">Home</a></li>
-                <li class="nav-item"><a href="#about">About</a></li>
-                <li class="nav-item"><a href="#programs">Programs</a></li>
-                <li class="nav-item"><a href="#sessions">Sessions</a></li>
-                <li class="nav-item"><a href="#showcase">Showcase</a></li>
+    <!-- Modern Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top" style="background: rgba(229, 87, 34, 0.95); backdrop-filter: blur(20px);">
+        <div class="container-fluid px-3">
+            <a class="navbar-brand d-flex align-items-center text-white fw-bold fs-4" href="#" style="font-family: 'Tangerine', cursive;">
+                <span class="me-2" style="font-size: 2rem;">🕉️</span>
+                <span class="brand-title-nav" style="font-family: 'Tiro Devanagari Sanskrit', serif;">अर्जुन उवाच</span>
+            </a>
+            
+            <!-- Hamburger Button -->
+            <button class="navbar-toggler border-0 p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+                <div class="hamburger-menu">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </div>
+            </button>
+            
+            <!-- Desktop Menu -->
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link text-white fw-500 px-3" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-500 px-3" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-500 px-3" href="#programs">Programs</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-500 px-3" href="#sessions">Sessions</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-500 px-3" href="#showcase">Showcase</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-500 px-3" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-500 px-3" href="#" id="login-link">Login</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Mobile Offcanvas Menu -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" style="background: linear-gradient(135deg, #E55722, #FF8C00);">
+            <div class="offcanvas-header border-bottom border-light border-opacity-25 pb-3">
+                <h5 class="offcanvas-title text-white d-flex align-items-center">
+                    <span class="me-2" style="font-size: 1.5rem;">🕉️</span>
+                    <span style="font-family: 'Tiro Devanagari Sanskrit', serif;">अर्जुन उवाच</span>
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white d-flex align-items-center py-3 px-2 rounded-3 hover-bg" href="#home" data-bs-dismiss="offcanvas">
+                            <i class="bi bi-house-fill me-3 fs-5"></i>
+                            <span class="fw-500">Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white d-flex align-items-center py-3 px-2 rounded-3 hover-bg" href="#about" data-bs-dismiss="offcanvas">
+                            <i class="bi bi-info-circle-fill me-3 fs-5"></i>
+                            <span class="fw-500">About</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white d-flex align-items-center py-3 px-2 rounded-3 hover-bg" href="#programs" data-bs-dismiss="offcanvas">
+                            <i class="bi bi-book-fill me-3 fs-5"></i>
+                            <span class="fw-500">Programs</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white d-flex align-items-center py-3 px-2 rounded-3 hover-bg" href="#sessions" data-bs-dismiss="offcanvas">
+                            <i class="bi bi-calendar-event-fill me-3 fs-5"></i>
+                            <span class="fw-500">Sessions</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white d-flex align-items-center py-3 px-2 rounded-3 hover-bg" href="#showcase" data-bs-dismiss="offcanvas">
+                            <i class="bi bi-images me-3 fs-5"></i>
+                            <span class="fw-500">Showcase</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white d-flex align-items-center py-3 px-2 rounded-3 hover-bg" href="#contact" data-bs-dismiss="offcanvas">
+                            <i class="bi bi-telephone-fill me-3 fs-5"></i>
+                            <span class="fw-500">Contact</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white d-flex align-items-center py-3 px-2 rounded-3 hover-bg" href="#" id="login-link-mobile" data-bs-dismiss="offcanvas">
+                            <i class="bi bi-person-circle me-3 fs-5"></i>
+                            <span class="fw-500">Admin Login</span>
+                        </a>
+                    </li>
+                </ul>
                 
-                <li class="nav-item"><a href="#contact">Contact</a></li>
-                <li class="nav-item"><a href="#" id="login-link">Login</a></li>
-            </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+                <!-- Quick Contact in Mobile Menu -->
+                <div class="mt-4 pt-4 border-top border-light border-opacity-25">
+                    <h6 class="text-white-50 mb-3 text-uppercase small">Quick Connect</h6>
+                    <div class="d-grid gap-2">
+                        <a href="https://chat.whatsapp.com/Cuy38GIN4HbHIby9SzUSwn" target="_blank" class="btn btn-light btn-lg rounded-pill d-flex align-items-center justify-content-center">
+                            <i class="bi bi-whatsapp me-2 text-success"></i>
+                            <span>Join WhatsApp</span>
+                        </a>
+                        <a href="https://www.youtube.com/@Arjunauvacha_Om" target="_blank" class="btn btn-outline-light btn-lg rounded-pill d-flex align-items-center justify-content-center">
+                            <i class="bi bi-youtube me-2 text-danger"></i>
+                            <span>YouTube Channel</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-background"></div>
-        <div class="hero-overlay"></div>
-    <div class="hero-sanskrit">दिव्य शान्ति</div>
-        <div class="hero-content">
-            <h1 class="brand-title"><span class="brand-om">ॐ</span> अर्जुन उवाच <span class="brand-om">ॐ</span></h1>
-            <div class="brand-subtitle">Arjunauvacha</div>
-            <div class="sanskrit-text">
-                श्रीमद्भगवद्गीता ज्ञानम्
-            </div>
-            <div class="hindi-text">
-                भगवद्गीता के पवित्र ज्ञान को समझते और बांटते हैं
-            </div>
-            <div class="english-text">
-                "Join our devoted community in studying and spreading the eternal wisdom of Bhagavad Gita. Together, we explore the divine teachings of Lord Krishna and apply them in our daily lives for spiritual growth and inner peace."
-            </div>
-            <div class="cta-buttons">
-                <button class="cta-btn" onclick="joinCommunity()">🤝 Join Our Community</button>
-                <a href="#programs" class="cta-btn secondary">📚 Explore Programs</a>
+    <section id="home" class="hero position-relative vh-100 d-flex align-items-center justify-content-center overflow-hidden">
+        <div class="hero-background position-absolute top-0 start-0 w-100 h-100"></div>
+        <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100"></div>
+        <div class="hero-sanskrit position-absolute">दिव्य शान्ति</div>
+        
+        <div class="container position-relative" style="z-index: 10;">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10 col-xl-8">
+                    <div class="hero-content text-center text-white p-4 p-md-5 rounded-4 backdrop-blur">
+                        <h1 class="brand-title display-2 fw-normal mb-2" style="font-family: 'Tiro Devanagari Sanskrit', serif;">
+                            <span class="brand-om me-2">ॐ</span> अर्जुन उवाच <span class="brand-om ms-2">ॐ</span>
+                        </h1>
+                        <div class="brand-subtitle fs-5 fw-semibold mb-4 opacity-90" style="font-family: 'Montserrat Alternates', sans-serif; letter-spacing: 0.06em;">
+                            Arjunauvacha
+                        </div>
+                        <div class="sanskrit-text fs-4 mb-3 fw-medium" style="font-family: 'Times New Roman', serif;">
+                            श्रीमद्भगवद्गीता ज्ञानम्
+                        </div>
+                        <div class="hindi-text fs-5 mb-3">
+                            भगवद्गीता के पवित्र ज्ञान को समझते और बांटते हैं
+                        </div>
+                        <div class="english-text fs-6 mb-4 lh-lg opacity-90">
+                            "Join our devoted community in studying and spreading the eternal wisdom of Bhagavad Gita. Together, we explore the divine teachings of Lord Krishna and apply them in our daily lives for spiritual growth and inner peace."
+                        </div>
+                        <div class="cta-buttons d-flex flex-column flex-sm-row gap-3 justify-content-center">
+                            <button class="btn btn-light btn-lg rounded-pill px-4 py-3 fw-bold fs-6 shadow-lg" onclick="joinCommunity()">
+                                <i class="bi bi-people-fill me-2"></i>Join Our Community
+                            </button>
+                            <a href="#programs" class="btn btn-outline-light btn-lg rounded-pill px-4 py-3 fw-bold fs-6">
+                                <i class="bi bi-book me-2"></i>Explore Programs
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="section-container">
-        <div class="container">
-            <h2 class="section-title">About Our Community</h2>
-            <div class="about-content">
-                <div class="card">
-                    <h3>🎯 Our Mission</h3>
-                    <p>To create a loving community where devotees come together to study the Bhagavad Gita, understand Krishna's divine teachings, and support each other's spiritual journey towards self-realization and devotion.</p>
+    <section id="about" class="py-5">
+        <div class="container py-4">
+            <div class="row justify-content-center mb-5">
+                <div class="col-12 text-center">
+                    <h2 class="section-title display-4 text-center mb-4" style="font-family: 'Tangerine', cursive; color: var(--deep-orange);">About Our Community</h2>
+                    <div class="title-underline mx-auto"></div>
                 </div>
-                <div class="card">
-                    <h3>📖 What We Study</h3>
-                    <p>We dive deep into the verses of Bhagavad Gita, exploring their meanings in Sanskrit, Hindi, and English. Our discussions help members apply these timeless teachings in modern life situations.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-lg modern-card">
+                        <div class="card-body p-4 text-center">
+                            <div class="card-icon mb-3">
+                                <i class="bi bi-bullseye text-warning display-4"></i>
+                            </div>
+                            <h3 class="card-title h4 mb-3 fw-bold text-warning">Our Mission</h3>
+                            <p class="card-text text-dark-emphasis lh-lg">To create a loving community where devotees come together to study the Bhagavad Gita, understand Krishna's divine teachings, and support each other's spiritual journey towards self-realization and devotion.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="card">
-                    <h3>🌟 Our Values</h3>
-                    <p>Devotion (Bhakti), Knowledge (Jnana), Service (Seva), and Community (Sangha) form the foundation of our spiritual practice and interactions with fellow devotees.</p>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-lg modern-card">
+                        <div class="card-body p-4 text-center">
+                            <div class="card-icon mb-3">
+                                <i class="bi bi-book-half text-warning display-4"></i>
+                            </div>
+                            <h3 class="card-title h4 mb-3 fw-bold text-warning">What We Study</h3>
+                            <p class="card-text text-dark-emphasis lh-lg">We dive deep into the verses of Bhagavad Gita, exploring their meanings in Sanskrit, Hindi, and English. Our discussions help members apply these timeless teachings in modern life situations.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-lg modern-card">
+                        <div class="card-body p-4 text-center">
+                            <div class="card-icon mb-3">
+                                <i class="bi bi-star-fill text-warning display-4"></i>
+                            </div>
+                            <h3 class="card-title h4 mb-3 fw-bold text-warning">Our Values</h3>
+                            <p class="card-text text-dark-emphasis lh-lg">Devotion (Bhakti), Knowledge (Jnana), Service (Seva), and Community (Sangha) form the foundation of our spiritual practice and interactions with fellow devotees.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Programs Section -->
-    <section id="programs" class="section-container programs-bg">
-        <div class="container">
-            <h2 class="section-title">Our Programs</h2>
-            <div class="program-grid">
-                <div class="card">
-                    <h3>Daily Gita Study Circle</h3>
-                    <p>Join our daily sessions where we read, discuss, and contemplate verses from the Bhagavad Gita. Perfect for beginners and advanced students alike.</p>
+    <section id="programs" class="py-5 bg-light bg-opacity-50">
+        <div class="container py-4">
+            <div class="row justify-content-center mb-5">
+                <div class="col-12 text-center">
+                    <h2 class="section-title display-4 text-center mb-4">Our Programs</h2>
+                    <div class="title-underline mx-auto"></div>
                 </div>
-                <div class="card">
-                    <h3>Bhajan & Kirtan Sessions</h3>
-                    <p>Experience the joy of devotional singing with our weekly bhajan and kirtan programs. Let your heart sing in praise of Lord Krishna.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-12 col-md-6 col-xl-3">
+                    <div class="card h-100 border-0 shadow-lg modern-card">
+                        <div class="card-body p-4 text-center">
+                            <div class="card-icon mb-3">
+                                <i class="bi bi-book text-warning display-4"></i>
+                            </div>
+                            <h3 class="card-title h5 mb-3 fw-bold text-warning">Daily Gita Study Circle</h3>
+                            <p class="card-text text-dark-emphasis small lh-lg">Join our daily sessions where we read, discuss, and contemplate verses from the Bhagavad Gita. Perfect for beginners and advanced students alike.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="card">
-                    <h3>Meditation & Dharana</h3>
-                    <p>Learn ancient meditation techniques mentioned in the Gita. Develop concentration and inner peace through guided meditation sessions.</p>
+                <div class="col-12 col-md-6 col-xl-3">
+                    <div class="card h-100 border-0 shadow-lg modern-card">
+                        <div class="card-body p-4 text-center">
+                            <div class="card-icon mb-3">
+                                <i class="bi bi-music-note-list text-warning display-4"></i>
+                            </div>
+                            <h3 class="card-title h5 mb-3 fw-bold text-warning">Bhajan & Kirtan Sessions</h3>
+                            <p class="card-text text-dark-emphasis small lh-lg">Experience the joy of devotional singing with our weekly bhajan and kirtan programs. Let your heart sing in praise of Lord Krishna.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="card center-card">
-                    <h3>Community Service</h3>
-                    <p>Practice Karma Yoga through community service projects. Serve society while growing spiritually through selfless action.</p>
+                <div class="col-12 col-md-6 col-xl-3">
+                    <div class="card h-100 border-0 shadow-lg modern-card">
+                        <div class="card-body p-4 text-center">
+                            <div class="card-icon mb-3">
+                                <i class="bi bi-peace text-warning display-4"></i>
+                            </div>
+                            <h3 class="card-title h5 mb-3 fw-bold text-warning">Meditation & Dharana</h3>
+                            <p class="card-text text-dark-emphasis small lh-lg">Learn ancient meditation techniques mentioned in the Gita. Develop concentration and inner peace through guided meditation sessions.</p>
+                        </div>
+                    </div>
                 </div>
-                <!-- center this card visually -->
+                <div class="col-12 col-md-6 col-xl-3">
+                    <div class="card h-100 border-0 shadow-lg modern-card">
+                        <div class="card-body p-4 text-center">
+                            <div class="card-icon mb-3">
+                                <i class="bi bi-heart-fill text-warning display-4"></i>
+                            </div>
+                            <h3 class="card-title h5 mb-3 fw-bold text-warning">Community Service</h3>
+                            <p class="card-text text-dark-emphasis small lh-lg">Practice Karma Yoga through community service projects. Serve society while growing spiritually through selfless action.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -746,5 +909,7 @@
     </footer>
 
     <script src="static/js/main.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

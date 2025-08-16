@@ -48,6 +48,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Modern navbar scroll effect
+window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+        if (window.scrollY > 50) {
+            navbar.style.background = 'rgba(229, 87, 34, 0.98)';
+            navbar.style.backdropFilter = 'blur(20px)';
+        } else {
+            navbar.style.background = 'rgba(229, 87, 34, 0.95)';
+            navbar.style.backdropFilter = 'blur(20px)';
+        }
+    }
+});
+
 window.addEventListener('scroll', () => {
     const navbar = document.querySelector('.navbar');
     if (!navbar) return;
@@ -195,14 +209,20 @@ function setAdminState(state) {
 function updateAdminUI() {
     const adminControls = document.getElementById('admin-controls');
     const loginLink = document.getElementById('login-link');
+    const loginLinkMobile = document.getElementById('login-link-mobile');
     const loginSec = document.getElementById('admin-login-section');
     const toolsSec = document.getElementById('admin-tools-section');
     const sessionsAdmin = document.getElementById('admin-events-controls');
+    
     if (isAdmin()) {
         if (adminControls) adminControls.style.display = 'block';
         if (loginLink) {
             loginLink.textContent = 'Logout';
             loginLink.onclick = handleLogoutClick;
+        }
+        if (loginLinkMobile) {
+            loginLinkMobile.innerHTML = '<i class="bi bi-person-check me-3 fs-5"></i><span class="fw-500">Logout</span>';
+            loginLinkMobile.onclick = handleLogoutClick;
         }
         if (loginSec) loginSec.style.display = 'none';
         if (toolsSec) toolsSec.style.display = 'block';
@@ -212,6 +232,10 @@ function updateAdminUI() {
         if (loginLink) {
             loginLink.textContent = 'Login';
             loginLink.onclick = (e) => { e.preventDefault(); openAdminModal(); };
+        }
+        if (loginLinkMobile) {
+            loginLinkMobile.innerHTML = '<i class="bi bi-person-circle me-3 fs-5"></i><span class="fw-500">Admin Login</span>';
+            loginLinkMobile.onclick = (e) => { e.preventDefault(); openAdminModal(); };
         }
         if (loginSec) loginSec.style.display = 'block';
         if (toolsSec) toolsSec.style.display = 'none';

@@ -16,6 +16,173 @@
     --glow-2: #E55722;
 }
 
+/* Modern hamburger menu animation */
+.hamburger-menu {
+    width: 30px;
+    height: 24px;
+    position: relative;
+    cursor: pointer;
+}
+
+.hamburger-menu .bar1,
+.hamburger-menu .bar2,
+.hamburger-menu .bar3 {
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    position: absolute;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hamburger-menu .bar1 { top: 0; }
+.hamburger-menu .bar2 { top: 50%; transform: translateY(-50%); }
+.hamburger-menu .bar3 { bottom: 0; }
+
+/* Mobile menu hover effects */
+.hover-bg:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    transition: all 0.3s ease;
+}
+
+/* Custom backdrop blur */
+.backdrop-blur {
+    background: rgba(0, 0, 0, 0.3);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Modern card styles */
+.modern-card {
+    background: rgba(255, 255, 255, 0.95) !important;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border-radius: 20px !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.modern-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(229, 87, 34, 0.15) !important;
+}
+
+.card-icon {
+    transition: transform 0.3s ease;
+}
+
+.modern-card:hover .card-icon {
+    transform: scale(1.1);
+}
+
+/* Section title with underline */
+.title-underline {
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--kesari), var(--deep-orange));
+    border-radius: 2px;
+}
+
+/* Brand styling */
+.brand-title-nav {
+    font-family: 'Tiro Devanagari Sanskrit', serif !important;
+    font-size: 1.5rem !important;
+    letter-spacing: 0.02em;
+}
+
+.brand-title {
+    font-family: 'Tiro Devanagari Sanskrit', serif !important;
+    text-shadow: 0 0 10px rgba(255,140,0,0.35), 0 0 20px rgba(229,87,34,0.2) !important;
+}
+
+.brand-subtitle {
+    font-family: 'Montserrat Alternates', sans-serif !important;
+    letter-spacing: 0.06em !important;
+}
+
+.sanskrit-text {
+    font-family: 'Times New Roman', serif !important;
+}
+
+/* Section title styling */
+.section-title {
+    font-family: 'Tangerine', cursive !important;
+    color: var(--deep-orange) !important;
+}
+
+/* Android-optimized mobile styles */
+@media (max-width: 768px) {
+    /* Better touch targets */
+    .btn {
+        min-height: 48px;
+        touch-action: manipulation;
+    }
+    
+    /* Improved card spacing on mobile */
+    .modern-card {
+        margin-bottom: 1rem;
+    }
+    
+    /* Better mobile hero */
+    .hero {
+        padding: 80px 15px 40px !important;
+        min-height: 90vh !important;
+    }
+    
+    .hero-content {
+        padding: 2rem 1.5rem !important;
+        max-width: 100% !important;
+    }
+    
+    /* Responsive text sizing */
+    .display-2 {
+        font-size: 2.5rem !important;
+    }
+    
+    .display-4 {
+        font-size: 2rem !important;
+    }
+    
+    /* Better gallery on mobile */
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1rem !important;
+    }
+    
+    .gallery-card img {
+        height: 150px !important;
+    }
+    
+    /* Improved offcanvas */
+    .offcanvas {
+        width: 85% !important;
+    }
+    
+    /* Better button hover states for touch */
+    .modern-card:active {
+        transform: translateY(-4px) scale(1.01) !important;
+    }
+    
+    /* Optimize navbar for Android */
+    .navbar {
+        padding: 0.75rem 1rem !important;
+        box-shadow: 0 2px 20px rgba(0,0,0,0.1) !important;
+    }
+}
+
+/* High DPI Android displays */
+@media (max-width: 768px) and (-webkit-min-device-pixel-ratio: 2) {
+    .hero-background {
+        background-size: cover;
+        background-position: center;
+    }
+    
+    .modern-card {
+        box-shadow: 0 8px 32px rgba(229, 87, 34, 0.12) !important;
+    }
+}
+
 /* Base Body & Font Styling */
 body {
     font-family: 'Inter', sans-serif;
