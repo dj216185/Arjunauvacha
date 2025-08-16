@@ -121,12 +121,12 @@
 
         /* --- Navigation --- */
         .navbar {
-            background: rgba(229, 87, 34, 0.95);
+            background: rgba(229, 87, 34, 0.98);
                 -webkit-backdrop-filter: blur(20px);
                 backdrop-filter: blur(20px);
             padding: 0.75rem 1.25rem;
-            box-shadow: 0 8px 32px rgba(229, 87, 34, 0.3);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(229, 87, 34, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
             position: fixed;
             width: 100%;
             top: 0;
@@ -202,11 +202,13 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             text-align: center;
             overflow: hidden;
-            padding: 0;
+            padding-top: calc(var(--nav-h) + 3rem);
+            padding-bottom: 2rem;
+            box-sizing: border-box;
         }
         .hero-background {
             position: fixed;
@@ -258,7 +260,8 @@
             animation: heroFloat 8s ease-in-out infinite;
             max-width: 90%;
             width: 100%;
-            margin-top: calc(var(--nav-h) + 1rem);
+            margin-top: 1rem;
+            transform: translateY(0);
         }
         .hero-content h1 {
             font-family: 'Tangerine', cursive;
@@ -565,7 +568,7 @@
             .brand-title-nav { font-size: 1.1rem; }
             .hero-content { 
                 padding: 2rem 1.5rem;
-                margin-top: calc(var(--nav-h) + 0.5rem);
+                margin-top: 1rem;
                 max-width: 95%;
                 border-radius: 25px;
             }
