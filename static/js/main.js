@@ -50,14 +50,12 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Modern navbar scroll effect
 window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
+    const navbar = document.querySelector('.modern-navbar');
     if (navbar) {
         if (window.scrollY > 50) {
-            navbar.style.background = 'rgba(229, 87, 34, 0.98)';
-            navbar.style.backdropFilter = 'blur(20px)';
+            navbar.classList.add('scrolled');
         } else {
-            navbar.style.background = 'rgba(229, 87, 34, 0.95)';
-            navbar.style.backdropFilter = 'blur(20px)';
+            navbar.classList.remove('scrolled');
         }
     }
 });
