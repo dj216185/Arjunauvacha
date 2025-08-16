@@ -203,16 +203,19 @@ body {
 /* Sanskrit overlay text rendered as element for better font support */
 .hero-sanskrit {
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 5;
     font-family: 'Noto Serif Devanagari', serif;
-    font-size: 6vw;
-    color: #FFF8E1;
-    text-shadow: 0 0 10px rgba(255,140,0,0.45), 0 0 20px rgba(229,87,34,0.25);
-    letter-spacing: 0.02em;
+    font-size: clamp(3rem, 5vw, 4rem);
+    color: rgba(255,248,225,0.12);
+    text-shadow: none;
+    letter-spacing: 0.04em;
     pointer-events: none;
+    font-weight: 300;
+    -webkit-user-select: none;
+    user-select: none;
 }
 .hero-overlay {
     position: absolute;
@@ -495,34 +498,225 @@ body {
     padding: 2.5rem;
 }
 
-/* --- Mobile Styles --- */
+/* --- Professional Mobile Styles for Android --- */
 @media (max-width: 768px) {
+    /* Navigation improvements */
+    .navbar {
+        padding: 0.75rem 1.25rem;
+        background: rgba(229, 87, 34, 0.98);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
     .nav-menu {
         position: fixed;
         left: -100%;
-        top: 70px;
+        top: 65px;
         flex-direction: column;
-        background: rgba(229, 87, 34, 0.95);
+        background: rgba(229, 87, 34, 0.98);
         width: 100%;
         text-align: center;
-        transition: 0.3s;
-        box-shadow: 0 10px 27px rgba(0,0,0,0.3);
-        padding: 2rem 0;
+        transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        padding: 1.5rem 0;
         gap: 1rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
+    
     .nav-menu.active {
         left: 0;
     }
+    
     .hamburger {
         display: flex;
     }
     .hamburger.active span:nth-child(2) { opacity: 0; }
     .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-    .hero h1 { font-size: 2rem; }
-    .sanskrit-text { font-size: 1.2rem; }
-    .cta-buttons { flex-direction: column; align-items: center; }
-    .contact-links { flex-direction: column; align-items: center; }
+    
+    /* Hero section refinements */
+    .hero {
+        padding: 6rem 1.5rem 3rem;
+        min-height: 90vh;
+    }
+    
+    .hero-content {
+        padding: 2rem 1.5rem;
+        border-radius: 20px;
+        max-width: 90%;
+    }
+    
+    .brand-title {
+        font-size: 2.5rem;
+        line-height: 1.2;
+        margin-bottom: 0.5rem;
+    }
+    
+    .brand-subtitle {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .hero .sanskrit-text {
+        font-size: 1.1rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .hero .hindi-text,
+    .hero .english-text {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin-bottom: 0.75rem;
+    }
+    
+    /* Enhanced CTA buttons */
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+    
+    .cta-btn {
+        width: 100%;
+        max-width: 280px;
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .cta-btn:active {
+        transform: translateY(1px) scale(0.98);
+    }
+    
+    /* Section improvements */
+    .section-container {
+        padding: 3rem 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    /* Card layout optimizations */
+    .about-content,
+    .program-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+    
+    .card {
+        padding: 2rem 1.5rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(229, 87, 34, 0.08);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .card:active {
+        transform: translateY(1px) scale(0.99);
+    }
+    
+    .card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    /* Gallery refinements */
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+    
+    .gallery-card {
+        border-radius: 12px;
+        overflow: hidden;
+    }
+    
+    .gallery-card img {
+        height: 140px;
+        transition: opacity 0.3s ease;
+    }
+    
+    .gallery-caption {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+    
+    /* Contact section improvements */
+    .contact-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+    
+    .contact-btn {
+        width: 100%;
+        max-width: 300px;
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        font-size: 1rem;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .contact-btn:active {
+        transform: translateY(1px) scale(0.98);
+    }
+    
+    /* Typography refinements */
+    body {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+    
+    /* Footer adjustments */
+    .footer {
+        padding: 2rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    /* Modal improvements for mobile */
+    .modal {
+        padding: 1rem;
+        align-items: flex-end;
+    }
+    
+    .modal-content {
+        width: 100%;
+        max-width: none;
+        border-radius: 20px 20px 0 0;
+        margin: 0;
+        padding: 2rem 1.5rem;
+        border: none;
+        box-shadow: 0 -8px 32px rgba(0,0,0,0.2);
+    }
+    
+    .admin-modal-content {
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    
+    .admin-form-group input,
+    .admin-form-group textarea {
+        padding: 0.75rem;
+        border-radius: 8px;
+        font-size: 1rem;
+    }
+    
+    .admin-form-actions {
+        gap: 1rem;
+        flex-direction: row;
+    }
+    
+    .admin-form-actions .cta-btn {
+        flex: 1;
+        max-width: none;
+    }
 }
 
 /* --- Animations --- */
