@@ -661,27 +661,16 @@
                 <h4>Add Event Photo</h4>
                 <form id="admin-add-form">
                     <div class="admin-form-group">
-                        <label>Image URL (CDN)</label>
-                        <input name="imageUrl" type="url" placeholder="https://cdn.example.com/photo.jpg" />
                         <label>Caption</label>
                         <input name="caption" type="text" placeholder="Event caption" />
+                        <label>Or upload from this device</label>
+                        <div id="local-dropzone" class="dropzone" tabindex="0">Drop image here or click to browse</div>
+                        <input id="local-file-input" type="file" accept="image/*" />
+                        <div id="local-upload-preview" class="upload-preview" aria-live="polite"></div>
+                        <small class="form-tip">Local images are resized and stored only on this device for the gallery.</small>
+                        <div class="admin-error"></div>
                         <div class="admin-form-actions">
                             <button type="submit" class="cta-btn">Add Photo</button>
-                        </div>
-                    </div>
-                </form>
-                <hr />
-                <h4>Add Event (Admin)</h4>
-                <form id="admin-event-form">
-                    <div class="admin-form-group">
-                        <label>Event Title</label>
-                        <input name="title" type="text" placeholder="Community Gathering" />
-                        <label>Date & Time (ISO)</label>
-                        <input name="datetime" type="datetime-local" />
-                        <label>Join URL (meeting link)</label>
-                        <input name="joinUrl" type="url" placeholder="https://zoom.example/..." />
-                        <div class="admin-form-actions">
-                            <button type="submit" class="cta-btn">Add Event</button>
                         </div>
                     </div>
                 </form>
@@ -698,7 +687,23 @@
             <div class="about-content">
                 <div class="card">
                     <h3>🗓️ Scheduled Programs</h3>
-                    <p>This is where our **dynamic schedule** will appear. For now, check back later for updates!</p>
+                    <p>This is where our dynamic schedule appears.</p>
+                    <div id="admin-events-controls">
+                        <h4>Add Event (Admin)</h4>
+            <form id="admin-event-form">
+                            <div class="admin-form-group">
+                <label for="event-title">Event Title</label>
+                <input id="event-title" name="title" type="text" placeholder="Community Gathering" />
+                <label for="event-datetime">Date & Time</label>
+                <input id="event-datetime" name="datetime" type="datetime-local" placeholder="YYYY-MM-DD HH:MM" title="Select date and time" />
+                <label for="event-join">Join URL (meeting link)</label>
+                <input id="event-join" name="joinUrl" type="url" placeholder="https://zoom.example/..." />
+                                <div class="admin-form-actions">
+                                    <button type="submit" class="cta-btn">Add Event</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                     <div id="events-list"></div>
                 </div>
             </div>
