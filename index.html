@@ -520,7 +520,7 @@
             </a>
             
             <!-- Hamburger Button -->
-            <button class="navbar-toggler border-0 p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+            <button class="navbar-toggler border-0 p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-label="Toggle navigation menu" title="Open menu">
                 <div class="hamburger-menu">
                     <div class="bar1"></div>
                     <div class="bar2"></div>
@@ -543,73 +543,114 @@
         </div>
         
         <!-- Mobile Offcanvas Menu -->
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" style="background: linear-gradient(135deg, #E55722, #FF8C00);">
+        <div class="offcanvas offcanvas-end w-100" tabindex="-1" id="offcanvasNavbar" style="background: linear-gradient(135deg, #E55722, #FF8C00);">
             <div class="offcanvas-header border-bottom border-light border-opacity-25 pb-3">
                 <h5 class="offcanvas-title text-white d-flex align-items-center">
                     <span class="me-2" style="font-size: 1.5rem;">🕉️</span>
                     <span style="font-family: 'Tiro Devanagari Sanskrit', serif;">अर्जुन उवाच</span>
                 </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
-                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <ul class="navbar-nav justify-content-start flex-grow-1">
                     <li class="nav-item mb-2">
-                        <a class="nav-link text-white d-flex align-items-center py-3 px-2 rounded-3 hover-bg" href="#home" data-bs-dismiss="offcanvas">
+                        <a class="nav-link text-white d-flex align-items-center py-3 px-3 rounded-3 hover-bg" href="#home" data-bs-dismiss="offcanvas">
                             <i class="bi bi-house-fill me-3 fs-5"></i>
-                            <span class="fw-500">Home</span>
+                            <span class="fw-500 fs-6">Home</span>
                         </a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a class="nav-link text-white d-flex align-items-center py-3 px-2 rounded-3 hover-bg" href="#about" data-bs-dismiss="offcanvas">
+                        <a class="nav-link text-white d-flex align-items-center py-3 px-3 rounded-3 hover-bg" href="#about" data-bs-dismiss="offcanvas">
                             <i class="bi bi-info-circle-fill me-3 fs-5"></i>
-                            <span class="fw-500">About</span>
+                            <span class="fw-500 fs-6">About Our Community</span>
                         </a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a class="nav-link text-white d-flex align-items-center py-3 px-2 rounded-3 hover-bg" href="#programs" data-bs-dismiss="offcanvas">
+                        <a class="nav-link text-white d-flex align-items-center py-3 px-3 rounded-3 hover-bg" href="#programs" data-bs-dismiss="offcanvas">
                             <i class="bi bi-book-fill me-3 fs-5"></i>
-                            <span class="fw-500">Programs</span>
+                            <span class="fw-500 fs-6">Our Programs</span>
                         </a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a class="nav-link text-white d-flex align-items-center py-3 px-2 rounded-3 hover-bg" href="#sessions" data-bs-dismiss="offcanvas">
+                        <a class="nav-link text-white d-flex align-items-center py-3 px-3 rounded-3 hover-bg" href="#sessions" data-bs-dismiss="offcanvas">
                             <i class="bi bi-calendar-event-fill me-3 fs-5"></i>
-                            <span class="fw-500">Sessions</span>
+                            <span class="fw-500 fs-6">Upcoming Sessions</span>
                         </a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a class="nav-link text-white d-flex align-items-center py-3 px-2 rounded-3 hover-bg" href="#showcase" data-bs-dismiss="offcanvas">
+                        <a class="nav-link text-white d-flex align-items-center py-3 px-3 rounded-3 hover-bg" href="#showcase" data-bs-dismiss="offcanvas">
                             <i class="bi bi-images me-3 fs-5"></i>
-                            <span class="fw-500">Showcase</span>
+                            <span class="fw-500 fs-6">Divine Showcase</span>
                         </a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a class="nav-link text-white d-flex align-items-center py-3 px-2 rounded-3 hover-bg" href="#contact" data-bs-dismiss="offcanvas">
+                        <a class="nav-link text-white d-flex align-items-center py-3 px-3 rounded-3 hover-bg" href="#contact" data-bs-dismiss="offcanvas">
                             <i class="bi bi-telephone-fill me-3 fs-5"></i>
-                            <span class="fw-500">Contact</span>
+                            <span class="fw-500 fs-6">Connect With Us</span>
                         </a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a class="nav-link text-white d-flex align-items-center py-3 px-2 rounded-3 hover-bg" href="#" id="login-link-mobile" data-bs-dismiss="offcanvas">
+                        <a class="nav-link text-white d-flex align-items-center py-3 px-3 rounded-3 hover-bg" href="#" id="login-link-mobile">
                             <i class="bi bi-person-circle me-3 fs-5"></i>
-                            <span class="fw-500">Admin Login</span>
+                            <span class="fw-500 fs-6">Admin Login</span>
                         </a>
                     </li>
                 </ul>
                 
+                <!-- Additional Features Section -->
+                <div class="mt-4 pt-4 border-top border-light border-opacity-25">
+                    <h6 class="text-white-50 mb-3 text-uppercase small fw-bold">Features</h6>
+                    <ul class="navbar-nav">
+                        <li class="nav-item mb-2">
+                            <a class="nav-link text-white d-flex align-items-center py-2 px-3 rounded-3 hover-bg" href="#programs" data-bs-dismiss="offcanvas">
+                                <i class="bi bi-journal-bookmark me-3"></i>
+                                <span class="small">Daily Gita Study Circle</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a class="nav-link text-white d-flex align-items-center py-2 px-3 rounded-3 hover-bg" href="#programs" data-bs-dismiss="offcanvas">
+                                <i class="bi bi-music-note-beamed me-3"></i>
+                                <span class="small">Bhajan & Kirtan Sessions</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a class="nav-link text-white d-flex align-items-center py-2 px-3 rounded-3 hover-bg" href="#programs" data-bs-dismiss="offcanvas">
+                                <i class="bi bi-peace me-3"></i>
+                                <span class="small">Meditation & Dharana</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a class="nav-link text-white d-flex align-items-center py-2 px-3 rounded-3 hover-bg" href="#programs" data-bs-dismiss="offcanvas">
+                                <i class="bi bi-heart-fill me-3"></i>
+                                <span class="small">Community Service</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
                 <!-- Quick Contact in Mobile Menu -->
                 <div class="mt-4 pt-4 border-top border-light border-opacity-25">
-                    <h6 class="text-white-50 mb-3 text-uppercase small">Quick Connect</h6>
+                    <h6 class="text-white-50 mb-3 text-uppercase small fw-bold">Quick Connect</h6>
                     <div class="d-grid gap-2">
-                        <a href="https://chat.whatsapp.com/Cuy38GIN4HbHIby9SzUSwn" target="_blank" class="btn btn-light btn-lg rounded-pill d-flex align-items-center justify-content-center">
+                        <a href="https://chat.whatsapp.com/Cuy38GIN4HbHIby9SzUSwn" target="_blank" rel="noopener noreferrer" class="btn btn-light btn-lg rounded-pill d-flex align-items-center justify-content-center">
                             <i class="bi bi-whatsapp me-2 text-success"></i>
-                            <span>Join WhatsApp</span>
+                            <span>Join WhatsApp Community</span>
                         </a>
-                        <a href="https://www.youtube.com/@Arjunauvacha_Om" target="_blank" class="btn btn-outline-light btn-lg rounded-pill d-flex align-items-center justify-content-center">
+                        <a href="https://www.youtube.com/@Arjunauvacha_Om" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light btn-lg rounded-pill d-flex align-items-center justify-content-center">
                             <i class="bi bi-youtube me-2 text-danger"></i>
                             <span>YouTube Channel</span>
                         </a>
+                        <a href="mailto:adhayageeta@gmail.com" class="btn btn-outline-light btn-lg rounded-pill d-flex align-items-center justify-content-center">
+                            <i class="bi bi-envelope-fill me-2 text-info"></i>
+                            <span>Email Us</span>
+                        </a>
                     </div>
+                </div>
+                
+                <!-- Footer Info in Mobile Menu -->
+                <div class="mt-4 pt-4 border-top border-light border-opacity-25 text-center">
+                    <p class="text-white-50 small mb-2">🕉️ Shree Krishna Disciples Community 🕉️</p>
+                    <p class="text-white-50 small mb-0">"सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज"</p>
                 </div>
             </div>
         </div>
