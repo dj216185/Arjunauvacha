@@ -199,29 +199,24 @@
         /* --- Hero Section --- */
         .hero {
             position: relative;
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: center;
             align-items: center;
             text-align: center;
             overflow: hidden;
-            padding-top: calc(var(--nav-h) + 3rem);
-            padding-bottom: 2rem;
-            box-sizing: border-box;
+            padding: 4rem 2rem 2rem;
         }
         .hero-background {
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -3;
-            background: 
-                radial-gradient(ellipse at top, rgba(255, 140, 0, 0.15) 0%, transparent 70%),
-                radial-gradient(ellipse at bottom, rgba(229, 87, 34, 0.2) 0%, transparent 70%),
-                linear-gradient(135deg, #FFF8E1 0%, #FFE0B3 25%, #FFCC80 50%, #FFB74D 75%, #FF8F65 100%);
-            background-size: 100% 100%;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: url('https://placehold.co/1920x1080/FF6600/FFFFFF?text=Divine+Serenity') no-repeat center center/cover;
+            background-attachment: fixed;
         }
         .hero-overlay {
             position: absolute;
@@ -229,107 +224,47 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(circle at 30% 20%, rgba(255, 140, 0, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 70% 80%, rgba(229, 87, 34, 0.08) 0%, transparent 50%),
-                linear-gradient(to bottom, 
-                    rgba(255, 248, 225, 0.1) 0%, 
-                    rgba(255, 248, 225, 0.3) 30%, 
-                    rgba(255, 183, 77, 0.2) 70%, 
-                    rgba(229, 87, 34, 0.4) 100%);
-            z-index: -2;
+            background-image: linear-gradient(to bottom, transparent, var(--deep-orange));
+            opacity: 0.7;
         }
         .hero-content {
             position: relative;
             z-index: 10;
             color: var(--white);
-            padding: 3rem 2rem;
-            border-radius: 40px;
-            background: 
-                linear-gradient(135deg, 
-                    rgba(0, 0, 0, 0.4) 0%, 
-                    rgba(229, 87, 34, 0.3) 50%, 
-                    rgba(0, 0, 0, 0.5) 100%);
-            -webkit-backdrop-filter: blur(25px) saturate(180%) brightness(110%);
-            backdrop-filter: blur(25px) saturate(180%) brightness(110%);
-            box-shadow: 
-                0 25px 60px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.2) inset,
-                0 1px 0 rgba(255, 255, 255, 0.3) inset;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            animation: heroFloat 8s ease-in-out infinite;
-            max-width: 90%;
-            width: 100%;
-            margin-top: 1rem;
-            transform: translateY(0);
+            padding: 3rem;
+            border-radius: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            animation: float 6s ease-in-out infinite;
         }
         .hero-content h1 {
             font-family: 'Tangerine', cursive;
-            font-size: clamp(2.8rem, 8vw, 5.5rem);
+            font-size: 4rem;
             color: var(--white);
-            text-shadow: 
-                0 0 20px rgba(255, 140, 0, 0.6),
-                0 0 40px rgba(229, 87, 34, 0.4),
-                2px 2px 8px rgba(0, 0, 0, 0.8);
-            margin-bottom: 0.5rem;
-            line-height: 1.1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 1rem;
         }
         /* Sanskrit-styled brand title */
-        .brand-title {
-            font-family: 'Tiro Devanagari Sanskrit', 'Noto Serif Devanagari', serif;
-            font-size: clamp(2.2rem, 7vw, 4.5rem);
-            letter-spacing: 0.02em;
-            color: var(--white);
-            text-shadow: 
-                0 0 15px rgba(255, 140, 0, 0.7),
-                0 0 30px rgba(229, 87, 34, 0.5),
-                2px 2px 6px rgba(0, 0, 0, 0.9);
-            margin-bottom: 0.75rem;
-            line-height: 1.2;
-            font-weight: 400;
-        }
+    .brand-title { font-weight: 400; }
         .brand-title .brand-om {
             font-size: 0.85em;
             margin: 0 0.4em;
             animation: omGlow 3s ease-in-out infinite alternate;
         }
-        .brand-subtitle {
-            font-family: 'Montserrat Alternates', 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: clamp(1.1rem, 3.2vw, 1.4rem);
-            color: rgba(255, 255, 255, 0.95);
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            margin-bottom: 2rem;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
-        }
+    .brand-subtitle { text-transform: uppercase; }
         .hero-content .sanskrit-text, .hero-content .hindi-text, .hero-content .english-text {
             color: var(--white);
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
             font-weight: 500;
-            margin-bottom: 1.5rem;
         }
         .hero-content .sanskrit-text {
-            font-size: clamp(1.3rem, 4.2vw, 1.9rem);
-            font-family: 'Noto Serif Devanagari', 'Times New Roman', serif;
-            font-weight: 600;
-            color: rgba(255, 215, 0, 0.95);
-            text-shadow: 
-                0 0 10px rgba(255, 140, 0, 0.5),
-                1px 1px 4px rgba(0, 0, 0, 0.8);
+            font-size: 1.5rem;
+            font-family: 'Times New Roman', serif;
         }
-        .hero-content .hindi-text { 
-            font-size: clamp(1.1rem, 3.5vw, 1.4rem);
-            font-weight: 500;
-            line-height: 1.4;
-        }
-        .hero-content .english-text { 
-            font-size: clamp(0.95rem, 3vw, 1.15rem);
-            line-height: 1.6;
-            max-width: 85%;
-            margin: 0 auto 2rem;
-            opacity: 0.9;
-        }
+        .hero-content .hindi-text { font-size: 1.2rem; }
+        .hero-content .english-text { font-size: 1.1rem; }
         .hero-sanskrit {
             top: 15%;
             right: 5%;
@@ -342,53 +277,40 @@
             pointer-events: none;
         }
         .cta-buttons {
-            margin-top: 2.5rem;
+            margin-top: 2rem;
             display: flex;
-            gap: 1.5rem;
+            gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
         }
         .cta-btn {
-            background: linear-gradient(135deg, var(--white) 0%, rgba(255, 255, 255, 0.95) 100%);
+            background: var(--white);
             color: var(--deep-orange);
-            padding: 1.2rem 3rem;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 1rem 2.5rem;
+            border: 1px solid var(--white);
             border-radius: 50px;
             font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
             text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
+            display: inline-block;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 
-                0 15px 35px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
         }
         .cta-btn:hover {
-            background: linear-gradient(135deg, var(--deep-orange) 0%, var(--kesari) 100%);
+            background: var(--deep-orange);
             color: var(--white);
-            transform: translateY(-8px) scale(1.05);
-            box-shadow: 
-                0 25px 50px rgba(0, 0, 0, 0.4),
-                0 0 30px rgba(255, 140, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
         .cta-btn.secondary {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(255, 140, 0, 0.85) 100%);
+            background: rgba(255, 215, 0, 0.9);
             color: var(--white);
-            border-color: rgba(255, 215, 0, 0.4);
         }
         .cta-btn.secondary:hover {
-            background: linear-gradient(135deg, rgba(255, 140, 0, 0.95) 0%, rgba(229, 87, 34, 0.95) 100%);
-            box-shadow: 
-                0 25px 50px rgba(0, 0, 0, 0.4),
-                0 0 30px rgba(229, 87, 34, 0.4);
+            background: rgba(255, 140, 0, 0.95);
         }
 
         /* --- Sections --- */

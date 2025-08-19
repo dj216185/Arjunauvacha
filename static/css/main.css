@@ -51,7 +51,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 150%;
     height: 100%;
     background: 
         radial-gradient(circle at 30% 20%, rgba(255, 140, 0, 0.1) 0%, transparent 50%),
@@ -702,13 +702,7 @@ body {
     width: 100%;
     height: 100%;
     z-index: 0;
-    /* Subtle gradient + texture to replace solid orange */
-    background-image: linear-gradient(135deg, #FFB84D 0%, #FF8C00 50%, #E55722 100%),
-                      radial-gradient(circle at 20% 10%, rgba(255,255,255,0.05) 0px, rgba(0,0,0,0) 50px),
-                      radial-gradient(circle at 80% 90%, rgba(255,255,255,0.04) 0px, rgba(0,0,0,0) 80px);
-    background-blend-mode: normal, overlay, overlay;
-    background-position: center center;
-    background-size: cover;
+    background: url('static/images/Airbrush-image-extender.jpeg') no-repeat center center/cover;
     background-attachment: fixed;
 }
 
