@@ -101,7 +101,8 @@ function joinCommunity() {
 }
 
 function joinWhatsApp() {
-    joinCommunity();
+    const whatsappLink = "https://chat.whatsapp.com/Cuy38GIN4HbHIby9SzUSwn";
+    showModal('🤝 Join Our Community', `Please click the link below to join our WhatsApp community: ${whatsappLink}\n\n🙏 Radhe Radhe 🙏`);
 }
 
 function openYouTube() {
@@ -579,6 +580,21 @@ if (adminModalElement) {
     adminModalElement.addEventListener('click', (ev) => {
         if (ev.target === adminModalElement) closeAdminModal();
     });
+}
+
+// --- WhatsApp Community Join Function ---
+function joinCommunity() {
+    // WhatsApp group invite link
+    const whatsappGroupLink = 'https://chat.whatsapp.com/Cuy38GIN4HbHIby9SzUSwn';
+    
+    // Open WhatsApp in a new tab/window
+    window.open(whatsappGroupLink, '_blank');
+    
+    // Optional: Show a confirmation modal
+    showModal(
+        '🕉️ Join Our Krishna Community', 
+        'You will be redirected to our WhatsApp group. Welcome to our spiritual family! 🙏'
+    );
 }
 
 // (Removed duplicate DOMContentLoaded listener; initialization happens above)

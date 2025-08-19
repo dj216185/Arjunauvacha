@@ -379,25 +379,23 @@
 
 /* Brand styling */
 .modern-navbar {
-    background: rgba(229, 87, 34, 0.85) !important;
-    -webkit-backdrop-filter: blur(30px) saturate(160%) brightness(105%);
-    backdrop-filter: blur(30px) saturate(160%) brightness(105%);
+    background: rgba(0, 0, 0, 0.05) !important;
+    -webkit-backdrop-filter: blur(10px) saturate(120%);
+    backdrop-filter: blur(10px) saturate(120%);
     box-shadow: 
-        0 8px 32px rgba(229, 87, 34, 0.3),
-        0 0 0 1px rgba(255, 255, 255, 0.1) inset,
-        0 1px 0 rgba(255, 255, 255, 0.15) inset;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        0 2px 10px rgba(0, 0, 0, 0.05),
+        0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .modern-navbar.scrolled {
-    background: rgba(229, 87, 34, 0.95) !important;
-    -webkit-backdrop-filter: blur(40px) saturate(180%);
-    backdrop-filter: blur(40px) saturate(180%);
+    background: rgba(0, 0, 0, 0.1) !important;
+    -webkit-backdrop-filter: blur(15px) saturate(140%);
+    backdrop-filter: blur(15px) saturate(140%);
     box-shadow: 
-        0 12px 40px rgba(229, 87, 34, 0.4),
-        0 0 0 1px rgba(255, 255, 255, 0.15) inset,
-        0 1px 0 rgba(255, 255, 255, 0.2) inset;
+        0 4px 15px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.08) inset;
 }
 
 .brand-om {
@@ -785,6 +783,17 @@ body {
 }
 
 .hero-content h1 {
+    font-family: 'Tangerine', cursive;
+    font-size: clamp(3rem, 8vw, 5rem);
+    color: var(--white);
+    text-shadow: 
+        0 0 20px rgba(255, 140, 0, 0.6),
+        2px 2px 8px rgba(0, 0, 0, 0.8);
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+}
+
+.hero-content h8 {
     font-family: 'Tangerine', cursive;
     font-size: clamp(3rem, 8vw, 5rem);
     color: var(--white);

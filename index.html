@@ -121,16 +121,14 @@
 
         /* --- Navigation --- */
         .navbar {
-            background: linear-gradient(135deg, 
-                rgba(255, 140, 0, 0.25) 0%, 
-                rgba(229, 87, 34, 0.2) 100%);
-            -webkit-backdrop-filter: blur(15px) saturate(150%);
-            backdrop-filter: blur(15px) saturate(150%);
+            background: rgba(0, 0, 0, 0.05);
+            -webkit-backdrop-filter: blur(10px) saturate(120%);
+            backdrop-filter: blur(10px) saturate(120%);
             padding: 0.5rem 1.25rem;
             box-shadow: 
-                0 2px 15px rgba(255, 140, 0, 0.1),
-                0 0 0 1px rgba(255, 215, 0, 0.1) inset;
-            border-bottom: 1px solid rgba(255, 140, 0, 0.15);
+                0 2px 10px rgba(0, 0, 0, 0.05),
+                0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             position: fixed;
             width: 100%;
             top: 0;
@@ -510,11 +508,73 @@
         /* Hero Landing Layout */
         .hero-title-section {
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            max-width: 90%;
+        }
+        
+        .hero-title-section .brand-title {
+            font-family: 'Montserrat', 'Arial', sans-serif;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: #FFFFFF;
+            text-shadow: 
+                0 4px 8px rgba(0, 0, 0, 0.8),
+                0 0 20px rgba(255, 255, 255, 0.2);
+            margin-bottom: 1rem;
+        }
+        
+        .hero-title-section .sanskrit-subtitle {
+            font-family: 'Noto Serif Devanagari', serif;
+            font-size: clamp(2.8rem, 8vw, 4.2rem);
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 
+                0 2px 6px rgba(0, 0, 0, 0.7),
+                0 0 15px rgba(255, 215, 0, 0.3);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
         }
         
         .hero-cta-section {
-            position: relative;
             z-index: 10;
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .cta-btn-compact-new {
+            min-width: 180px;
+            max-width: 200px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border-width: 2px;
+            padding: 0.6rem 1.2rem;
+        }
+        
+        .cta-btn-compact-new.btn-light {
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .cta-btn-compact-new.btn-light:hover {
+            background: #FFFFFF;
+            color: #E55722;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+        
+        .cta-btn-compact-new.btn-outline-light {
+            background: transparent;
+            color: #FFFFFF;
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .cta-btn-compact-new.btn-outline-light:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #FFFFFF;
+            border-color: #FFFFFF;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
         }
 
         /* --- Sections --- */
@@ -807,6 +867,33 @@
                 padding: 0.75rem 1.5rem !important;
                 font-size: 0.9rem !important;
             }
+            
+            /* Hero title section mobile styles */
+            .hero-title-section {
+                max-width: 95% !important;
+                padding: 0 1rem;
+            }
+            
+            .hero-title-section .brand-title {
+                font-size: clamp(1.8rem, 8vw, 2.5rem) !important;
+                margin-bottom: 0.75rem !important;
+            }
+            
+            .hero-title-section .sanskrit-subtitle {
+                font-size: clamp(1.8rem, 8vw, 2.5rem) !important;
+            }
+            
+            .hero-cta-section {
+                max-width: 95% !important;
+                padding: 0 1rem;
+            }
+            
+            .cta-btn-compact-new {
+                min-width: 160px !important;
+                max-width: 180px !important;
+                padding: 0.7rem 1rem !important;
+                font-size: 0.9rem !important;
+            }
         }
         
         /* --- Enhanced Animations --- */
@@ -992,28 +1079,29 @@
     </nav>
 
     <!-- Hero Landing Section -->
-    <section id="home" class="hero-landing position-relative vh-100 d-flex align-items-center justify-content-center overflow-hidden" style="padding-top: 8vh;">
+    <section id="home" class="hero-landing position-relative vh-100 d-flex align-items-end justify-content-center overflow-hidden" style="padding-bottom: 5vh;">
         <div class="hero-background position-absolute top-0 start-0 w-100 h-100"></div>
         <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100"></div>
         
-        <div class="container position-relative hero-container">
-            <div class="row justify-content-center">
-                <div class="col-12 text-center text-white">
-                    <h1 class="brand-title display-2 fw-normal mb-5">
-                        <span class="brand-om me-2">ॐ</span> अर्जुन उवाच <span class="brand-om ms-2">ॐ</span>
-                    </h1>
-                    <div class="brand-subtitle fs-4 fw-semibold mb-4 opacity-90">
-                        Arjunauvacha
-                    </div>
-                    <div class="cta-buttons d-flex flex-column flex-sm-row gap-2 justify-content-center">
-                        <button class="btn cta-btn-compact cta-primary rounded-pill px-3 py-2 fw-semibold shadow-sm" onclick="joinCommunity()">
-                            <i class="bi bi-people-fill me-1"></i>Join Community
-                        </button>
-                        <a href="#programs" class="btn cta-btn-compact cta-secondary rounded-pill px-3 py-2 fw-semibold">
-                            <i class="bi bi-book me-1"></i>Explore Programs
-                        </a>
-                    </div>
-                </div>
+        <!-- Title Section - Lower Center Area -->
+        <div class="hero-title-section position-absolute text-center text-white" style="top: 60%; left: 50%; transform: translate(-50%, -50%);">
+            <h1 class="sanskrit-subtitle display-1 fw-bold mb-3">
+                श्रीमद्भगवद्गीता ज्ञानम्
+            </h1>
+            <h8 class="brand-title display-4 fw-bold mb-3">
+                ARJUNAUVACHA
+            </h8>
+        </div>
+        
+        <!-- CTA Buttons - Very Bottom Area -->
+        <div class="hero-cta-section position-absolute text-center" style="bottom: 2vh; left: 50%; transform: translateX(-50%);">
+            <div class="cta-buttons d-flex flex-column gap-3 align-items-center">
+                <button class="btn cta-btn-compact-new btn-light rounded-pill px-3 py-2 fw-semibold shadow" onclick="joinCommunity()">
+                    <i class="bi bi-people-fill me-2"></i>Join Community
+                </button>
+                <a href="#programs" class="btn cta-btn-compact-new btn-outline-light rounded-pill px-3 py-2 fw-semibold">
+                    <i class="bi bi-book me-2"></i>Explore Programs
+                </a>
             </div>
         </div>
     </section>
