@@ -736,7 +736,7 @@ body {
     text-align: center;
     overflow: hidden;
     padding: calc(var(--nav-h) + 2rem) 2rem 2rem;
-    background: url('../images/Airbrush-image-extender.jpeg') no-repeat center center/cover;
+    background: url('../images/hero_back.png') no-repeat center center/cover;
     background-attachment: fixed;
 }
 
