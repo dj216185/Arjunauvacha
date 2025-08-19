@@ -443,6 +443,13 @@
 
 /* Android-optimized mobile styles */
 @media (max-width: 768px) {
+    /* Improve hero background on Android: avoid fixed attachment & focus subject */
+    .hero-background {
+        background-attachment: scroll !important;
+        background-position: center 30% !important; /* lift focal point for tall bars */
+        background-size: cover !important;
+        will-change: transform;
+    }
     /* Full-screen offcanvas for mobile */
     .offcanvas.w-100 {
         width: 100vw !important;
@@ -464,8 +471,8 @@
     
     /* Better mobile hero */
     .hero {
-        padding: 80px 15px 40px !important;
-        min-height: 90vh !important;
+    padding: 80px 15px 40px !important;
+    min-height: 100svh !important; /* better Android viewport handling */
     }
     
     .hero-content {
