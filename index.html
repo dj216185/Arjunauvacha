@@ -121,12 +121,14 @@
 
         /* --- Navigation --- */
         .navbar {
-            background: rgba(229, 87, 34, 0.98);
-                -webkit-backdrop-filter: blur(20px);
-                backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.2);
+                -webkit-backdrop-filter: blur(25px) saturate(180%);
+                backdrop-filter: blur(25px) saturate(180%);
             padding: 0.75rem 1.25rem;
-            box-shadow: 0 8px 32px rgba(229, 87, 34, 0.4);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             position: fixed;
             width: 100%;
             top: 0;
@@ -479,17 +481,17 @@
             .nav-menu {
                 position: fixed;
                 left: -100%;
-                top: 70px;
+                top: 56px;
                 flex-direction: column;
-                background: rgba(229, 87, 34, 0.95);
+                background: rgba(0, 0, 0, 0.4);
+                -webkit-backdrop-filter: blur(30px);
+                backdrop-filter: blur(30px);
                 width: 100%;
                 text-align: center;
                 transition: 0.3s;
                 box-shadow: 0 10px 27px rgba(0,0,0,0.3);
                 padding: 2rem 0;
                 gap: 1rem;
-                -webkit-backdrop-filter: blur(20px);
-                backdrop-filter: blur(20px);
             }
             .nav-menu.active {
                 left: 0;

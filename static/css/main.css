@@ -647,12 +647,14 @@ body {
 
 /* --- Navigation --- */
 .navbar {
-    background: rgba(229, 87, 34, 0.95);
-    -webkit-backdrop-filter: blur(20px);
-    backdrop-filter: blur(20px);
+    background: rgba(0, 0, 0, 0.2);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    backdrop-filter: blur(25px) saturate(180%);
     padding: 0.5rem 1rem;
-    box-shadow: 0 8px 32px rgba(229, 87, 34, 0.3);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     position: fixed;
     width: 100%;
     top: 0;
@@ -1082,12 +1084,13 @@ body {
 @media (max-width: 768px) {
     /* Navigation improvements */
     .navbar {
-    padding: 0.5rem 0.75rem;
-        background: rgba(229, 87, 34, 0.98);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .nav-menu {
+        padding: 0.5rem 0.75rem;
+        background: rgba(0, 0, 0, 0.3);
+        -webkit-backdrop-filter: blur(20px) saturate(150%);
+        backdrop-filter: blur(20px) saturate(150%);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }    .nav-menu {
         position: fixed;
         left: -100%;
         top: 65px;
