@@ -1330,11 +1330,12 @@
                     <div class="admin-form-group">
                         <label>Caption</label>
                         <input name="caption" type="text" placeholder="Event caption" />
-                        <label>Or upload from this device</label>
-                        <div id="local-dropzone" class="dropzone" tabindex="0">Drop image here or click to browse</div>
-                        <input id="local-file-input" type="file" accept="image/*" />
-                        <div id="local-upload-preview" class="upload-preview" aria-live="polite"></div>
-                        <small class="form-tip">Local images are resized and stored only on this device for the gallery.</small>
+                        <label>Select Image</label>
+                        <select id="image-select" class="form-select">
+                            <option value="">Select an image...</option>
+                        </select>
+                        <div id="image-preview" class="upload-preview" aria-live="polite"></div>
+                        <small class="form-tip">Select from available images in the gallery collection.</small>
                         <div class="admin-error"></div>
                         <div class="admin-form-actions">
                             <button type="submit" class="cta-btn">Add Photo</button>

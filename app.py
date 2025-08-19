@@ -4,12 +4,12 @@ from flask_cors import CORS
 from datetime import datetime
 import sqlite3
 from pathlib import Path
-from werkzeug.utils import secure_filename
+# werkzeug import removed - no longer needed for uploads
 
 BASE_DIR = Path(__file__).parent
-# Store DB and uploads inside the bundled backend directory
+# Store DB inside the bundled backend directory
 DB_PATH = BASE_DIR / 'backend' / 'data.db'
-UPLOAD_DIR = BASE_DIR / 'backend' / 'uploads'
+# Upload functionality removed - images served directly from static/images
 # Frontend lives in this folder
 FRONTEND_DIR = BASE_DIR
 FRONTEND_STATIC_DIR = FRONTEND_DIR / 'static'
@@ -17,9 +17,9 @@ ADMIN_TOKEN = os.getenv('ADMIN_TOKEN', 'change-me')
 
 app = Flask(__name__)
 CORS(app)
-app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024  # 10 MB max upload
+# Max content length removed - no longer needed for uploads
 
-UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+# Upload directory setup removed - no longer needed
 
 # --- DB helpers ---
 
@@ -109,35 +109,35 @@ def put_events():
     conn.close()
     return jsonify({"ok": True})
 
-# --- Uploads ---
-
-ALLOWED_EXT = {'.jpg', '.jpeg', '.png', '.gif', '.webp'}
-
-@app.post('/api/upload')
-def upload_image():
-    require_admin()
-    if 'file' not in request.files:
-        abort(400)
-    f = request.files['file']
-    if not f or f.filename == '':
-        abort(400)
-    filename = secure_filename(f.filename)
-    ext = Path(filename).suffix.lower()
-    if ext not in ALLOWED_EXT:
-        abort(415)
-    ts = datetime.utcnow().strftime('%Y%m%d%H%M%S%f')
-    final_name = f"{ts}{ext}"
-    save_path = UPLOAD_DIR / final_name
-    f.save(save_path)
-    # Absolute URL for the browser
-    url = request.host_url.rstrip('/') + f"/uploads/{final_name}"
-    return jsonify({"url": url})
+# --- Upload functionality removed - images now served directly from static/images ---
+# 
+# ALLOWED_EXT = {'.jpg', '.jpeg', '.png', '.gif', '.webp'}
+# 
+# @app.post('/api/upload')
+# def upload_image():
+#     require_admin()
+#     if 'file' not in request.files:
+#         abort(400)
+#     f = request.files['file']
+#     if not f or f.filename == '':
+#         abort(400)
+#     filename = secure_filename(f.filename)
+#     ext = Path(filename).suffix.lower()
+#     if ext not in ALLOWED_EXT:
+#         abort(415)
+#     ts = datetime.utcnow().strftime('%Y%m%d%H%M%S%f')
+#     final_name = f"{ts}{ext}"
+#     save_path = UPLOAD_DIR / final_name
+#     f.save(save_path)
+#     # Absolute URL for the browser
+#     url = request.host_url.rstrip('/') + f"/uploads/{final_name}"
+#     return jsonify({"url": url})
 
 # --- Serve frontend and assets ---
 
-@app.get('/uploads/<path:filename>')
-def uploads(filename: str):
-    return send_from_directory(UPLOAD_DIR, filename)
+# @app.get('/uploads/<path:filename>')
+# def uploads(filename: str):
+#     return send_from_directory(UPLOAD_DIR, filename)
 
 @app.get('/static/<path:filename>')
 def static_files(filename: str):

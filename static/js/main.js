@@ -163,6 +163,19 @@ async function remotePush(kind, list) {
     } catch (_) { return false; }
 }
 
+// Available images in static/images folder
+const availableImages = [
+    { filename: 'community_gathering.svg', name: 'Community Gathering' },
+    { filename: 'gita_study_session_1.svg', name: 'Gita Study Session 1' },
+    { filename: 'gita_study_session_2.svg', name: 'Gita Study Session 2' },
+    { filename: 'kirtan_night_1.svg', name: 'Kirtan Night 1' },
+    { filename: 'kirtan_night_2.svg', name: 'Kirtan Night 2' },
+    { filename: 'meditation_workshop_1.svg', name: 'Meditation Workshop 1' },
+    { filename: 'meditation_workshop_2.svg', name: 'Meditation Workshop 2' },
+    { filename: 'Airbrush-image-extender.jpeg', name: 'Artistic Image' },
+    { filename: 'icon.jpeg', name: 'Icon' }
+];
+
 // Default gallery items (fallback)
 const defaultGallery = [
     { src: `${STATIC_BASE}community_gathering.svg`, caption: 'Community Gathering' },
@@ -351,7 +364,7 @@ if (adminForm) {
         if (validateCredentials(u, p)) {
             setAdminState(true);
             closeAdminModal();
-            showModal('Welcome back, Admin', 'You are now logged in. Use Manage Gallery to add event photos from your device.');
+            showModal('Welcome back, Admin', 'You are now logged in. Use Manage Gallery to add event photos from our collection.');
         } else {
             const err = adminForm.querySelector('.admin-error');
             if (err) err.textContent = 'Invalid username or password.';
@@ -362,113 +375,53 @@ if (adminForm) {
 // Admin add form
 const adminAddForm = document.getElementById('admin-add-form');
 if (adminAddForm) {
-    // Local image selection state
-    let localImageDataUrl = '';
+    // Selected image from available options
+    let selectedImageSrc = '';
 
-    // Helpers: read image, resize for reasonable size, and return data URL
-    const MAX_W = 1280; // slightly smaller to reduce storage size
-    const MAX_H = 960;
-    function fileToDataUrlResized(file) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onerror = reject;
-            reader.onload = () => {
-                const img = new Image();
-                img.onload = () => {
-                    let { width, height } = img;
-                    let scale = Math.min(MAX_W / width, MAX_H / height, 1);
-                    const canvas = document.createElement('canvas');
-                    canvas.width = Math.round(width * scale);
-                    canvas.height = Math.round(height * scale);
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                    // Use JPEG for better size, fallback to PNG if transparency likely isn't needed
-                    try {
-                        const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
-                        resolve(dataUrl);
-                    } catch (e) {
-                        try { resolve(canvas.toDataURL()); } catch (e2) { reject(e2); }
-                    }
-                };
-                img.onerror = reject;
-                img.src = reader.result;
-            };
-            reader.readAsDataURL(file);
+    // Wire image selection dropdown
+    const imageSelect = document.getElementById('image-select');
+    const preview = document.getElementById('image-preview');
+    
+    if (imageSelect && preview) {
+        // Populate image options
+        imageSelect.innerHTML = '<option value="">Select an image...</option>';
+        availableImages.forEach(img => {
+            const option = document.createElement('option');
+            option.value = img.filename;
+            option.textContent = img.name;
+            imageSelect.appendChild(option);
         });
-    }
 
-    // Wire dropzone + hidden input
-    const dropzone = document.getElementById('local-dropzone');
-    const fileInput = document.getElementById('local-file-input');
-    const preview = document.getElementById('local-upload-preview');
-    if (dropzone && fileInput && preview) {
-        const handleFiles = async (files) => {
-            const file = files && files[0];
-            if (!file) return;
-            try {
-                const dataUrl = await fileToDataUrlResized(file);
-                localImageDataUrl = dataUrl;
-                preview.innerHTML = `<img src="${dataUrl}" alt="Preview" />`;
-                // Clear URL field since local image takes precedence
-                const urlInput = adminAddForm.querySelector('input[name="imageUrl"]');
-                if (urlInput) urlInput.value = '';
-            } catch (err) {
-                localImageDataUrl = '';
-                preview.textContent = 'Failed to load image.';
+        imageSelect.addEventListener('change', (e) => {
+            const filename = e.target.value;
+            if (filename) {
+                selectedImageSrc = `${STATIC_BASE}${filename}`;
+                preview.innerHTML = `<img src="${selectedImageSrc}" alt="Preview" />`;
+            } else {
+                selectedImageSrc = '';
+                preview.innerHTML = '';
             }
-        };
-
-        dropzone.addEventListener('click', () => fileInput.click());
-        dropzone.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click(); } });
-        fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
-        ['dragenter','dragover'].forEach(ev => dropzone.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); dropzone.classList.add('dragover'); }));
-        ['dragleave','drop'].forEach(ev => dropzone.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); dropzone.classList.remove('dragover'); }));
-        dropzone.addEventListener('drop', (e) => { handleFiles(e.dataTransfer.files); });
+        });
     }
 
     adminAddForm.addEventListener('submit', async (ev) => {
         ev.preventDefault();
         if (!isAdmin()) return; // block non-admin
         const cap = adminAddForm.querySelector('input[name="caption"]').value.trim();
-        let finalSrc = '';
         const err = adminAddForm.querySelector('.admin-error');
         if (err) err.textContent = '';
 
-        if (localImageDataUrl) {
-            // If API backend is enabled, upload the image and use the returned URL
-            if (remoteEnabled()) {
-                try {
-                    // Convert dataURL to Blob
-                    const blob = await (await fetch(localImageDataUrl)).blob();
-                    const form = new FormData();
-                    const filename = `upload_${Date.now()}.jpg`;
-                    form.append('file', new File([blob], filename, { type: blob.type || 'image/jpeg' }));
-                    const base = window.AppConfig.api.baseUrl.replace(/\/$/, '');
-                    const headers = {};
-                    const token = window.AppConfig.api.adminToken;
-                    if (token) headers['x-admin-token'] = token;
-                    const res = await fetch(`${base}/upload`, { method: 'POST', body: form, headers });
-                    if (!res.ok) throw new Error('Upload failed');
-                    const { url } = await res.json();
-                    finalSrc = url;
-                } catch (e) {
-                    console.warn('Upload failed, falling back to data URL', e);
-                    finalSrc = localImageDataUrl;
-                }
-            } else {
-                finalSrc = localImageDataUrl; // use data URL locally
-            }
-        } else {
-            if (err) err.textContent = 'Please upload an image from this device.';
+        if (!selectedImageSrc) {
+            if (err) err.textContent = 'Please select an image from the list.';
             return;
         }
 
         const items = getGalleryItems();
-        items.unshift({ src: finalSrc, caption: cap });
+        items.unshift({ src: selectedImageSrc, caption: cap });
         saveGalleryItems(items);
         adminAddForm.reset();
         if (preview) preview.innerHTML = '';
-        localImageDataUrl = '';
+        selectedImageSrc = '';
         if (err) err.textContent = '';
         renderGallery();
     });
