@@ -23,6 +23,9 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    
     <link rel="stylesheet" href="static/css/main.css">
     <style>
         /* --- CSS Variables for colors and glow effects --- */
@@ -1006,7 +1009,6 @@
                     <li class="nav-item"><a class="nav-link text-white fw-500 px-3" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link text-white fw-500 px-3" href="#programs">Programs</a></li>
                     <li class="nav-item"><a class="nav-link text-white fw-500 px-3" href="#sessions">Sessions</a></li>
-                    <li class="nav-item"><a class="nav-link text-white fw-500 px-3" href="#showcase">Showcase</a></li>
                     <li class="nav-item"><a class="nav-link text-white fw-500 px-3" href="#contact">Contact</a></li>
                     <li class="nav-item"><a class="nav-link text-white fw-500 px-3" href="#" id="login-link">Login</a></li>
                 </ul>
@@ -1046,12 +1048,6 @@
                         <a class="nav-link text-white d-flex align-items-center py-3 px-3 rounded-3 hover-bg" href="#sessions" data-bs-dismiss="offcanvas">
                             <i class="bi bi-calendar-event-fill me-3 fs-5"></i>
                             <span class="fw-500 fs-6">Upcoming Sessions</span>
-                        </a>
-                    </li>
-                    <li class="nav-item mb-2">
-                        <a class="nav-link text-white d-flex align-items-center py-3 px-3 rounded-3 hover-bg" href="#showcase" data-bs-dismiss="offcanvas">
-                            <i class="bi bi-images me-3 fs-5"></i>
-                            <span class="fw-500 fs-6">Divine Showcase</span>
                         </a>
                     </li>
                     <li class="nav-item mb-2">
@@ -1163,6 +1159,52 @@
                     <div class="title-underline mx-auto"></div>
                 </div>
             </div>
+            
+            <!-- Gallery integrated into About section -->
+            <div class="desktop_3" unique-script-id="w-w-dm-id">
+                <div class="responsive-container-block bigContainer">
+                    <div class="responsive-container-block Container">
+                        <div class="swiper-container mySwiper">
+                            <div class="btn">
+                                <div class="swiper-button-nexts">
+                                    <img class="nextArrow" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/Vector.png" alt="Next">
+                                </div>
+                                <div class="swiper-button-prevs">
+                                    <img class="prevArrow" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/Vector.png" alt="Previous">
+                                </div>
+                            </div>
+                            <div class="swiper-wrapper" id="gallery-swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img class="mainImage" src="static/images/Image1.png" alt="Community Gathering">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img class="mainImage" src="static/images/Image2.png" alt="Gita Study Session">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img class="mainImage" src="static/images/Image3.png" alt="Gita Study Session">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img class="mainImage" src="static/images/Image4.png" alt="Gita Study Session">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img class="mainImage" src="static/images/Image5.png" alt="Kirtan Night">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img class="mainImage" src="static/images/Image6.png" alt="Kirtan Night">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img class="mainImage" src="static/images/Image4.png" alt="Meditation Workshop">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img class="mainImage" src="static/images/Image5.png" alt="Meditation Workshop">
+                                </div>
+                            </div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <div class="row g-4">
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="card h-100 border-0 shadow-lg modern-card">
@@ -1254,49 +1296,6 @@
                             <p class="card-text text-dark-emphasis small lh-lg">Practice Karma Yoga through community service projects. Serve society while growing spiritually through selfless action.</p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Showcase Section -->
-    <section id="showcase" class="section-container">
-        <div class="container">
-            <h2 class="section-title">Our Divine Showcase</h2>
-            <p class="showcase-desc">
-                A glimpse into our community events and spiritual gatherings. These moments capture the joy, devotion, and unity we share.
-            </p>
-            <div id="admin-controls">
-                <button class="cta-btn" onclick="openAdminModal()">Manage Gallery (Admin)</button>
-            </div>
-            <div class="gallery-grid">
-                <div class="gallery-card">
-                    <img src="static/images/community_gathering.svg" alt="Community Gathering" loading="lazy" decoding="async">
-                    <div class="gallery-caption">Community Gathering</div>
-                </div>
-                <div class="gallery-card">
-                    <img src="static/images/gita_study_session_1.svg" alt="Gita Study Session" loading="lazy" decoding="async">
-                    <div class="gallery-caption">Gita Study Session</div>
-                </div>
-                <div class="gallery-card">
-                    <img src="static/images/gita_study_session_2.svg" alt="Gita Study Session" loading="lazy" decoding="async">
-                    <div class="gallery-caption">Gita Study Session</div>
-                </div>
-                <div class="gallery-card">
-                    <img src="static/images/kirtan_night_1.svg" alt="Kirtan Night" loading="lazy" decoding="async">
-                    <div class="gallery-caption">Kirtan Night</div>
-                </div>
-                <div class="gallery-card">
-                    <img src="static/images/kirtan_night_2.svg" alt="Kirtan Night" loading="lazy" decoding="async">
-                    <div class="gallery-caption">Kirtan Night</div>
-                </div>
-                <div class="gallery-card">
-                    <img src="static/images/meditation_workshop_1.svg" alt="Meditation Workshop" loading="lazy" decoding="async">
-                    <div class="gallery-caption">Meditation Workshop</div>
-                </div>
-                <div class="gallery-card">
-                    <img src="static/images/meditation_workshop_2.svg" alt="Meditation Workshop" loading="lazy" decoding="async">
-                    <div class="gallery-caption">Meditation Workshop</div>
                 </div>
             </div>
         </div>
@@ -1413,5 +1412,7 @@
     <script src="static/js/main.js"></script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 </body>
 </html>

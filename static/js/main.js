@@ -208,56 +208,47 @@ function saveGalleryItems(items) {
 }
 
 function renderGallery() {
-    const grid = document.querySelector('.gallery-grid');
-    if (!grid) return;
-    const items = getGalleryItems();
-    grid.innerHTML = '';
-    items.forEach((it, idx) => {
-        const card = document.createElement('div');
-        card.className = 'gallery-card';
+    const swiperWrapper = document.querySelector('#gallery-swiper-wrapper');
+    if (!swiperWrapper) return;
+    
+    // Fixed images - using the 7 different images you added
+    const fixedImages = [
+        { src: 'static/images/Image1.png', caption: 'Community Gathering' },
+        { src: 'static/images/Image2.png', caption: 'Gita Study Session' },
+        { src: 'static/images/Image3.png', caption: 'Spiritual Learning' },
+        { src: 'static/images/Image4.png', caption: 'Kirtan Night' },
+        { src: 'static/images/Image5.png', caption: 'Meditation Workshop' },
+        { src: 'static/images/Image6.png', caption: 'Community Service' },
+        { src: 'static/images/Image1.png', caption: 'Divine Gathering' }
+    ];
+    
+    swiperWrapper.innerHTML = '';
+    
+    fixedImages.forEach((item, idx) => {
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide';
 
         const img = document.createElement('img');
-        img.src = it.src;
-        img.alt = it.caption || `Event ${idx+1}`;
-    img.loading = 'lazy';
-    img.decoding = 'async';
+        img.className = 'mainImage';
+        img.src = item.src;
+        img.alt = item.caption || `Event ${idx+1}`;
+        
         // Fallback if the image fails to load
         img.onerror = () => {
             img.onerror = null;
-            img.src = `${STATIC_BASE}community_gathering.svg`;
+            img.src = 'static/images/community_gathering.svg';
         };
-        card.appendChild(img);
+        slide.appendChild(img);
 
-        const cap = document.createElement('div');
-        cap.className = 'gallery-caption';
-        cap.textContent = it.caption || '';
-        card.appendChild(cap);
-
-        // If admin, show controls
-        if (isAdmin()) {
-            const ctrl = document.createElement('div');
-            ctrl.style.display = 'flex';
-            ctrl.style.justifyContent = 'center';
-            ctrl.style.gap = '0.5rem';
-            ctrl.style.padding = '0.5rem';
-
-            const del = document.createElement('button');
-            del.className = 'cta-btn';
-            del.textContent = 'Delete';
-            del.style.padding = '0.3rem 0.6rem';
-            del.addEventListener('click', () => {
-                const items = getGalleryItems();
-                items.splice(idx, 1);
-                saveGalleryItems(items);
-                renderGallery();
-            });
-            ctrl.appendChild(del);
-
-            card.appendChild(ctrl);
-        }
-
-        grid.appendChild(card);
+        swiperWrapper.appendChild(slide);
     });
+    
+    // Update Swiper if it exists
+    setTimeout(() => {
+        if (window.swiperInstance) {
+            window.swiperInstance.update();
+        }
+    }, 100);
 }
 
 // Admin helpers
@@ -549,6 +540,36 @@ function joinCommunity() {
         'You will be redirected to our WhatsApp group. Welcome to our spiritual family! 🙏'
     );
 }
+
+// --- Swiper Gallery Initialization ---
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Swiper after DOM is loaded
+    setTimeout(() => {
+        if (typeof Swiper !== 'undefined') {
+            window.swiperInstance = new Swiper(`[unique-script-id="w-w-dm-id"] .mySwiper`, {
+                slidesPerView: 1.5,
+                centeredSlides: true,
+                spaceBetween: 5,
+                pagination: {
+                    el: `[unique-script-id="w-w-dm-id"] .swiper-pagination`,
+                    clickable: true,
+                },
+                loop: true,
+                autoplay: {
+                    delay: 2000, // 2 seconds
+                    disableOnInteraction: false, // Keep autoplay even after user interaction
+                },
+                navigation: {
+                    nextEl: `[unique-script-id="w-w-dm-id"] .swiper-button-nexts`,
+                    prevEl: `[unique-script-id="w-w-dm-id"] .swiper-button-prevs`,
+                },
+            });
+            console.log('Swiper initialized successfully');
+        } else {
+            console.warn('Swiper not loaded yet');
+        }
+    }, 500);
+});
 
 // (Removed duplicate DOMContentLoaded listener; initialization happens above)
 
