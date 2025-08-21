@@ -1596,3 +1596,55 @@ body {
     padding-left: 10px;
   }
 }
+
+/* --- Enhanced Offcanvas Close Button Styles --- */
+.offcanvas .btn-close {
+    opacity: 1 !important;
+    filter: brightness(2.5) contrast(1.5) !important;
+    background-size: 1.2em !important;
+    width: 1.8em !important;
+    height: 1.8em !important;
+    margin: 0 !important;
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.offcanvas .btn-close:hover {
+    filter: brightness(3) contrast(2) !important;
+    transform: scale(1.15);
+    transition: all 0.2s ease;
+}
+
+.offcanvas .btn-close:focus {
+    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.5) !important;
+    filter: brightness(3) contrast(2) !important;
+}
+
+/* Custom close button for offcanvas */
+.offcanvas-header .btn-link {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.offcanvas-header .btn-link:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+    transform: scale(1.1);
+    color: #fff !important;
+}
+
+.offcanvas-header .btn-link:focus {
+    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.3) !important;
+    color: #fff !important;
+}
+
+/* --- Offcanvas Menu Icon Styling --- */
+.offcanvas-title img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}

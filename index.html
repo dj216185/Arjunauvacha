@@ -7,6 +7,12 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Arjunauvacha</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="static/images/icon.jpeg">
+    <link rel="shortcut icon" type="image/jpeg" href="static/images/icon.jpeg">
+    <link rel="apple-touch-icon" href="static/images/icon.jpeg">
+    
     <!-- Google Fonts for a serene look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -159,13 +165,11 @@
         .hamburger-menu .bar3 {
             width: 100%;
             height: 3px;
-            background: linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.95) 0%, 
-                rgba(255, 215, 0, 0.8) 100%);
+            background: #ffffff;
             position: absolute;
             border-radius: 2px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 1px 3px rgba(255, 140, 0, 0.3);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         .hamburger-menu .bar1 { top: 0; }
@@ -1019,10 +1023,16 @@
         <div class="offcanvas offcanvas-end w-100" tabindex="-1" id="offcanvasNavbar">
             <div class="offcanvas-header border-bottom border-opacity-25 pb-3">
                 <h5 class="offcanvas-title text-white d-flex align-items-center">
+                    <img src="static/images/icon.jpeg" alt="Arjunauvacha Icon" class="me-2">
                     <span class="me-2 brand-om">🕉️</span>
                     <span class="brand-title-nav">अर्जुन उवाच</span>
                 </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                <div class="d-flex align-items-center gap-2">
+                    <!-- Custom visible close button with X icon -->
+                    <button type="button" class="btn btn-link p-2 text-white" data-bs-dismiss="offcanvas" aria-label="Close Menu" title="Close Menu" style="font-size: 1.5rem; line-height: 1; text-decoration: none; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
             </div>
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-start flex-grow-1">
@@ -1068,17 +1078,14 @@
                 <div class="mt-4 pt-4 border-top border-light border-opacity-25">
                     <h6 class="text-white-50 mb-3 text-uppercase small fw-bold">Quick Connect</h6>
                     <div class="d-grid gap-2">
-                        <a href="https://chat.whatsapp.com/Cuy38GIN4HbHIby9SzUSwn" target="_blank" rel="noopener noreferrer" class="btn btn-light btn-lg rounded-pill d-flex align-items-center justify-content-center">
-                            <i class="bi bi-whatsapp me-2 text-success"></i>
-                            <span>Join WhatsApp Community</span>
+                        <a href="https://chat.whatsapp.com/Cuy38GIN4HbHIby9SzUSwn" target="_blank" rel="noopener noreferrer" class="contact-btn">
+                            💬 Join WhatsApp Community
                         </a>
-                        <a href="https://www.youtube.com/@Arjunauvacha_Om" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light btn-lg rounded-pill d-flex align-items-center justify-content-center">
-                            <i class="bi bi-youtube me-2 text-danger"></i>
-                            <span>YouTube Channel</span>
+                        <a href="https://www.youtube.com/@Arjunauvacha_Om" target="_blank" rel="noopener noreferrer" class="contact-btn">
+                            📺 YouTube Channel
                         </a>
-                        <a href="mailto:adhayageeta@gmail.com" class="btn btn-outline-light btn-lg rounded-pill d-flex align-items-center justify-content-center">
-                            <i class="bi bi-envelope-fill me-2 text-info"></i>
-                            <span>Email Us</span>
+                        <a href="mailto:adhayageeta@gmail.com" class="contact-btn">
+                            📧 Email Us
                         </a>
                     </div>
                 </div>
