@@ -369,6 +369,178 @@
     transform: scale(1.1);
 }
 
+/* --- Wisdom Section (Gita Quotes) --- */
+.wisdom-section {
+    background: linear-gradient(135deg, rgba(255, 248, 225, 0.5) 0%, rgba(255, 235, 180, 0.5) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.wisdom-section::before {
+    content: '🕉️';
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    font-size: 10rem;
+    opacity: 0.05;
+    animation: floatSanskrit 20s ease-in-out infinite;
+}
+
+.wisdom-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    margin-top: 2rem;
+}
+
+.quote-card {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 3rem 2.5rem;
+    border-radius: 30px;
+    box-shadow: 
+        0 20px 60px rgba(229, 87, 34, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    max-width: 900px;
+    text-align: center;
+    position: relative;
+    transition: all 0.5s ease;
+    animation: fadeInUp 1s ease-out;
+}
+
+.quote-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 30px 80px rgba(229, 87, 34, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+}
+
+.quote-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.quote-sanskrit {
+    font-family: 'Noto Serif Devanagari', 'Times New Roman', serif;
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    color: var(--deep-orange);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.quote-translation {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+    font-weight: 500;
+}
+
+.quote-chapter {
+    font-size: 1rem;
+    color: var(--kesari);
+    font-weight: 700;
+    margin-bottom: 2rem;
+    letter-spacing: 0.5px;
+}
+
+.quote-btn {
+    background: linear-gradient(135deg, var(--deep-orange) 0%, var(--kesari) 100%);
+    color: white;
+    padding: 0.9rem 2rem;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 8px 20px rgba(229, 87, 34, 0.3);
+}
+
+.quote-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(229, 87, 34, 0.4);
+    background: linear-gradient(135deg, var(--kesari) 0%, var(--deep-orange) 100%);
+}
+
+.quote-btn:active {
+    transform: translateY(-1px) scale(1.02);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* Mobile responsive for wisdom section */
+@media (max-width: 768px) {
+    .wisdom-content {
+        min-height: 350px;
+        margin-top: 1.5rem;
+    }
+    
+    .quote-card {
+        padding: 2rem 1.5rem;
+        border-radius: 20px;
+        max-width: 95%;
+    }
+    
+    .quote-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .quote-sanskrit {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+    
+    .quote-translation {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+    
+    .quote-chapter {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .quote-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.95rem;
+        width: 100%;
+        max-width: 250px;
+        justify-content: center;
+    }
+}
+
 /* Section title with underline */
 .title-underline {
     width: 100px;
@@ -1005,7 +1177,99 @@ body {
 /* Hide admin-only tools until logged in */
 #admin-tools-section { display: none; }
 /* Hide sessions add-event controls until admin */
-#admin-events-controls { display: none; margin: 0.75rem 0 1rem; }
+#admin-events-controls { 
+    display: none; 
+    margin: 0.75rem 0 1rem; 
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 15px;
+    border: 2px solid rgba(229, 87, 34, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+#admin-events-controls h4 {
+    color: var(--deep-orange);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+#admin-events-controls .admin-form-group label {
+    color: #333;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+#admin-events-controls .admin-form-group input {
+    padding: 0.75rem;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.9);
+    font-size: 1rem;
+    width: 100%;
+    transition: border-color 0.2s ease;
+}
+
+#admin-events-controls .admin-form-group input:focus {
+    outline: 2px solid var(--deep-orange);
+    outline-offset: 2px;
+    border-color: var(--deep-orange);
+}
+
+#admin-events-controls .cta-btn {
+    background: var(--deep-orange);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+}
+
+#admin-events-controls .cta-btn:hover {
+    background: var(--dark-orange);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Event delete button - only visible to admins */
+.event-card .event-actions button.delete-event-btn {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.2);
+}
+
+.event-card .event-actions button.delete-event-btn:hover {
+    background: linear-gradient(135deg, #c82333 0%, #bd2130 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+}
+
+.event-card .event-actions button.delete-event-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(220, 53, 69, 0.3);
+}
+
+.event-card .event-actions button.delete-event-btn i {
+    font-size: 0.9em;
+}
+
+/* Hide any admin-only elements when not admin */
+[data-admin-only="true"]:not(.admin-visible) {
+    display: none !important;
+}
+
 /* Small helper text */
 .form-tip { opacity: 0.85; font-size: 0.9rem; }
 
@@ -1409,12 +1673,18 @@ body {
 }
 
 .desktop_3 .swiper-container.mySwiper {
-  padding-top: 0px;
-  padding-right: 0px;
-  padding-bottom: 50px;
-  padding-left: 0px;
-  max-width: 100%;
-  height: 400px; /* Add height to make images bigger */
+    position: relative; /* Anchor absolutely positioned nav */
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 50px;
+    padding-left: 0px;
+    max-width: 100%;
+    height: 400px; /* Add height to make images bigger */
+}
+
+/* Marquee-like continuous scroll: force linear easing */
+[unique-script-id="w-w-dm-id"] .swiper-wrapper {
+    transition-timing-function: linear !important;
 }
 
 .desktop_3 .swiper-button-nexts {
@@ -1425,7 +1695,7 @@ body {
   border-bottom-right-radius: 50px;
   border-bottom-left-radius: 50px;
   margin-top: 0px;
-  margin-right: 80px;
+    margin-right: 16px;
   margin-bottom: 0px;
   margin-left: 0px;
   padding-top: 16px;
@@ -1435,12 +1705,26 @@ body {
 }
 
 .desktop_3 .btn {
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  width: 100%;
-  flex-direction: row-reverse;
-  position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    width: 100%;
+    flex-direction: row-reverse;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 20; /* Above slides */
+    pointer-events: none; /* Don't block slide dragging */
+}
+
+.desktop_3 .swiper-button-nexts,
+.desktop_3 .swiper-button-prevs {
+    pointer-events: auto; /* Clickable even when parent disables events */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .desktop_3 .swiper-button-prevs {
@@ -1457,7 +1741,7 @@ body {
   margin-top: 0px;
   margin-right: 0px;
   margin-bottom: 0px;
-  margin-left: 80px;
+    margin-left: 16px;
 }
 
 .desktop_3 .prevArrow {
@@ -1496,14 +1780,11 @@ body {
   justify-content: center;
   -webkit-box-align: center;
   align-items: center;
-  opacity: 0.3;
+  opacity: 1;
 }
 
-.desktop_3 .swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.desktop_3 .swiper-slide.swiper-slide-active {
+  opacity: 1;
 }
 
 .desktop_3 .nextArrow {

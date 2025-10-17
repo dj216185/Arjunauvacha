@@ -1,4 +1,4 @@
-// Main JS extracted from app.html and modularized
+// Main JS - Static version with Bhagavad Gita quotes
 
 // --- Modal Functionality ---
 const modal = document.getElementById('modal-container');
@@ -21,6 +21,115 @@ window.addEventListener('click', (event) => {
         modal.style.display = 'none';
     }
 });
+
+// --- Bhagavad Gita Quotes ---
+const gitaQuotes = [
+    {
+        sanskrit: "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन। मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥",
+        translation: "You have a right to perform your prescribed duty, but you are not entitled to the fruits of action. Never consider yourself the cause of the results of your activities, and never be attached to not doing your duty.",
+        chapter: "Chapter 2, Verse 47"
+    },
+    {
+        sanskrit: "योगस्थः कुरु कर्माणि सङ्गं त्यक्त्वा धनञ्जय। सिद्ध्यसिद्ध्योः समो भूत्वा समत्वं योग उच्यते॥",
+        translation: "Perform your duty equipoised, O Arjuna, abandoning all attachment to success or failure. Such equanimity is called yoga.",
+        chapter: "Chapter 2, Verse 48"
+    },
+    {
+        sanskrit: "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत। अभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहम्॥",
+        translation: "Whenever there is a decline in righteousness and an increase in unrighteousness, O Arjuna, at that time I manifest myself on earth.",
+        chapter: "Chapter 4, Verse 7"
+    },
+    {
+        sanskrit: "परित्राणाय साधूनां विनाशाय च दुष्कृताम्। धर्मसंस्थापनार्थाय सम्भवामि युगे युगे॥",
+        translation: "To deliver the pious and to annihilate the miscreants, as well as to reestablish the principles of religion, I advent Myself millennium after millennium.",
+        chapter: "Chapter 4, Verse 8"
+    },
+    {
+        sanskrit: "श्रेयान्स्वधर्मो विगुणः परधर्मात्स्वनुष्ठितात्। स्वधर्मे निधनं श्रेयः परधर्मो भयावहः॥",
+        translation: "It is far better to discharge one's prescribed duties, even though faultily, than another's duties perfectly. Destruction in the course of performing one's own duty is better than engaging in another's duties, for to follow another's path is dangerous.",
+        chapter: "Chapter 3, Verse 35"
+    },
+    {
+        sanskrit: "मन्मना भव मद्भक्तो मद्याजी मां नमस्कुरु। मामेवैष्यसि सत्यं ते प्रतिजाने प्रियोऽसि मे॥",
+        translation: "Always think of Me, become My devotee, worship Me and offer your homage unto Me. Thus you will come to Me without fail. I promise you this because you are My very dear friend.",
+        chapter: "Chapter 18, Verse 65"
+    },
+    {
+        sanskrit: "सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज। अहं त्वां सर्वपापेभ्यो मोक्षयिष्यामि मा शुचः॥",
+        translation: "Abandon all varieties of religion and just surrender unto Me. I shall deliver you from all sinful reactions. Do not fear.",
+        chapter: "Chapter 18, Verse 66"
+    },
+    {
+        sanskrit: "यो मां पश्यति सर्वत्र सर्वं च मयि पश्यति। तस्याहं न प्रणश्यामि स च मे न प्रणश्यति॥",
+        translation: "For one who sees Me everywhere and sees everything in Me, I am never lost, nor is he ever lost to Me.",
+        chapter: "Chapter 6, Verse 30"
+    },
+    {
+        sanskrit: "बुद्धियुक्तो जहातीह उभे सुकृतदुष्कृते। तस्माद्योगाय युज्यस्व योगः कर्मसु कौशलम्॥",
+        translation: "A man engaged in devotional service rids himself of both good and bad actions even in this life. Therefore strive for yoga, which is the art of all work.",
+        chapter: "Chapter 2, Verse 50"
+    },
+    {
+        sanskrit: "ध्यायतो विषयान्पुंसः सङ्गस्तेषूपजायते। सङ्गात्सञ्जायते कामः कामात्क्रोधोऽभिजायते॥",
+        translation: "While contemplating the objects of the senses, a person develops attachment for them, and from such attachment lust develops, and from lust anger arises.",
+        chapter: "Chapter 2, Verse 62"
+    },
+    {
+        sanskrit: "क्रोधाद्भवति सम्मोहः सम्मोहात्स्मृतिविभ्रमः। स्मृतिभ्रंशाद् बुद्धिनाशो बुद्धिनाशात्प्रणश्यति॥",
+        translation: "From anger, complete delusion arises, and from delusion bewilderment of memory. When memory is bewildered, intelligence is lost, and when intelligence is lost one falls down again into the material pool.",
+        chapter: "Chapter 2, Verse 63"
+    },
+    {
+        sanskrit: "उद्धरेदात्मनात्मानं नात्मानमवसादयेत्। आत्मैव ह्यात्मनो बन्धुरात्मैव रिपुरात्मनः॥",
+        translation: "One must deliver himself with the help of his mind, and not degrade himself. The mind is the friend of the conditioned soul, and his enemy as well.",
+        chapter: "Chapter 6, Verse 5"
+    },
+    {
+        sanskrit: "यं हि न व्यथयन्त्येते पुरुषं पुरुषर्षभ। समदुःखसुखं धीरं सोऽमृतत्वाय कल्पते॥",
+        translation: "O best among men, the person who is not disturbed by happiness and distress and is steady in both is certainly eligible for liberation.",
+        chapter: "Chapter 2, Verse 15"
+    },
+    {
+        sanskrit: "असक्तबुद्धिः सर्वत्र जितात्मा विगतस्पृहः। नैष्कर्म्यसिद्धिं परमां संन्यासेनाधिगच्छति॥",
+        translation: "One who is self-controlled and unattached and who disregards all material enjoyments can obtain, by practice of renunciation, the highest perfect stage of freedom from reaction.",
+        chapter: "Chapter 18, Verse 49"
+    },
+    {
+        sanskrit: "तस्मात्सर्वेषु कालेषु मामनुस्मर युध्य च। मय्यर्पितमनोबुद्धिर्मामेवैष्यस्यसंशयः॥",
+        translation: "Therefore, Arjuna, you should always think of Me in the form of Krishna and at the same time carry out your prescribed duty of fighting. With your activities dedicated to Me and your mind and intelligence fixed on Me, you will attain Me without doubt.",
+        chapter: "Chapter 8, Verse 7"
+    }
+];
+
+let currentQuoteIndex = 0;
+
+function displayQuote(index) {
+    const quote = gitaQuotes[index];
+    const sanskritEl = document.getElementById('quote-sanskrit');
+    const translationEl = document.getElementById('quote-translation');
+    const chapterEl = document.getElementById('quote-chapter');
+    
+    if (sanskritEl && translationEl && chapterEl) {
+        sanskritEl.textContent = quote.sanskrit;
+        translationEl.textContent = quote.translation;
+        chapterEl.textContent = quote.chapter;
+    }
+}
+
+function nextQuote() {
+    currentQuoteIndex = (currentQuoteIndex + 1) % gitaQuotes.length;
+    displayQuote(currentQuoteIndex);
+}
+
+function randomQuote() {
+    currentQuoteIndex = Math.floor(Math.random() * gitaQuotes.length);
+    displayQuote(currentQuoteIndex);
+}
+
+// Auto-rotate quotes every 10 seconds
+setInterval(() => {
+    nextQuote();
+}, 10000);
 
 // --- Navigation and Scrolling ---
 const hamburger = document.querySelector('.hamburger');
@@ -50,7 +159,7 @@ document.addEventListener('click', (e) => {
     const link = e.target && e.target.closest ? e.target.closest('a[href^="#"]') : null;
     if (!link) return;
     const href = link.getAttribute('href');
-    if (!href || href === '#' || href === '#!') return; // ignore placeholders
+    if (!href || href === '#' || href === '#!') return;
     const target = document.querySelector(href);
     if (!target) return;
     e.preventDefault();
@@ -97,18 +206,96 @@ window.addEventListener('scroll', () => {
 // --- Community Action Functions ---
 function joinCommunity() {
     const whatsappLink = "https://chat.whatsapp.com/Cuy38GIN4HbHIby9SzUSwn";
-    showModal('🤝 Join Our Community', `Please click the link below to join our WhatsApp community: ${whatsappLink}\n\n🙏 Radhe Radhe 🙏`);
+    window.open(whatsappLink, '_blank');
+    showModal('🕉️ Join Our Krishna Community', 'You will be redirected to our WhatsApp group. Welcome to our spiritual family! 🙏');
 }
 
 function joinWhatsApp() {
     const whatsappLink = "https://chat.whatsapp.com/Cuy38GIN4HbHIby9SzUSwn";
-    showModal('🤝 Join Our Community', `Please click the link below to join our WhatsApp community: ${whatsappLink}\n\n🙏 Radhe Radhe 🙏`);
+    window.open(whatsappLink, '_blank');
+    showModal('🤝 Join Our Community', `Welcome to our WhatsApp community!\\n\\n🙏 Radhe Radhe 🙏`);
 }
 
 function openYouTube() {
     const youtubeUrl = "https://www.youtube.com/@Arjunauvacha_Om";
-    showModal('📺 YouTube Channel', `Visit our YouTube channel for spiritual content and live sessions!\n\nChannel URL: ${youtubeUrl}`);
+    window.open(youtubeUrl, '_blank');
+    showModal('📺 YouTube Channel', `Visit our YouTube channel for spiritual content and live sessions!`);
 }
+
+// --- Gallery rendering (static images already in HTML) ---
+// Gallery is now static - images are embedded in index.html
+
+// --- Swiper Gallery Initialization ---
+function initSwiperWithRetry(maxRetries = 40, intervalMs = 250) {
+    // Avoid double init
+    if (window.swiperInstance && typeof window.swiperInstance.destroy === 'function') {
+        return; // already initialized
+    }
+    const container = document.querySelector('[unique-script-id="w-w-dm-id"] .mySwiper');
+    if (typeof Swiper === 'undefined' || !container) {
+        if (maxRetries > 0) {
+            setTimeout(() => initSwiperWithRetry(maxRetries - 1, intervalMs), intervalMs);
+        } else {
+            console.warn('Swiper could not be initialized: script or container missing');
+        }
+        return;
+    }
+
+    // Determine slides count to set loopedSlides appropriately
+    const wrapper = container.querySelector('.swiper-wrapper');
+    const slidesCount = wrapper ? wrapper.querySelectorAll('.swiper-slide').length : 1;
+    const loopedSlides = Math.max(3, slidesCount);
+
+    try {
+        window.swiperInstance = new Swiper(container, {
+            // Marquee-like settings
+            slidesPerView: 1.3,
+            centeredSlides: false,
+            spaceBetween: 10,
+            speed: 2000, // slow, continuous movement
+            freeMode: { enabled: true, momentum: false },
+            loop: true,
+            loopedSlides,
+            loopAdditionalSlides: Math.max(8, loopedSlides),
+            loopFillGroupWithBlank: true,
+            watchOverflow: false,
+            autoplay: {
+                delay: 0, // continuous
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+            },
+            allowTouchMove: true,
+            grabCursor: true,
+            keyboard: { enabled: true },
+            // Avoid observer re-inits interrupting the scroll
+            observer: false,
+            observeParents: false,
+            // Keep nav/pagination if desired
+            pagination: {
+                el: '[unique-script-id="w-w-dm-id"] .swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '[unique-script-id="w-w-dm-id"] .swiper-button-nexts',
+                prevEl: '[unique-script-id="w-w-dm-id"] .swiper-button-prevs',
+            },
+        });
+        console.log('Swiper initialized successfully with', { slidesCount, loopedSlides });
+    } catch (e) {
+        console.error('Error initializing Swiper, retrying...', e);
+        setTimeout(() => initSwiperWithRetry(maxRetries - 1, intervalMs), intervalMs);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Display first quote
+    if (typeof displayQuote === 'function') displayQuote(0);
+    // Try to init once DOM is ready
+    initSwiperWithRetry();
+});
+
+// Also try after full page load (ensures CDN scripts are present)
+window.addEventListener('load', () => initSwiperWithRetry());
 
 const loginLink = document.getElementById('login-link');
 
@@ -154,13 +341,20 @@ async function remotePush(kind, list) {
         const headers = { 'Content-Type': 'application/json' };
         const token = window.AppConfig.api.adminToken;
         if (token) headers['x-admin-token'] = token;
-        await fetch(`${base}/${kind}`, {
+        const response = await fetch(`${base}/${kind}`, {
             method: 'PUT',
             headers,
             body: JSON.stringify(list || [])
         });
+        if (!response.ok) {
+            console.error(`Failed to push ${kind}:`, response.status, response.statusText);
+            return false;
+        }
         return true;
-    } catch (_) { return false; }
+    } catch (error) {
+        console.error(`Error pushing ${kind}:`, error);
+        return false;
+    }
 }
 
 // Available images in static/images folder
@@ -208,47 +402,14 @@ function saveGalleryItems(items) {
 }
 
 function renderGallery() {
-    const swiperWrapper = document.querySelector('#gallery-swiper-wrapper');
-    if (!swiperWrapper) return;
-    
-    // Fixed images - using the 7 different images you added
-    const fixedImages = [
-        { src: 'static/images/Image1.png', caption: 'Community Gathering' },
-        { src: 'static/images/Image2.png', caption: 'Gita Study Session' },
-        { src: 'static/images/Image3.png', caption: 'Spiritual Learning' },
-        { src: 'static/images/Image4.png', caption: 'Kirtan Night' },
-        { src: 'static/images/Image5.png', caption: 'Meditation Workshop' },
-        { src: 'static/images/Image6.png', caption: 'Community Service' },
-        { src: 'static/images/Image1.png', caption: 'Divine Gathering' }
-    ];
-    
-    swiperWrapper.innerHTML = '';
-    
-    fixedImages.forEach((item, idx) => {
-        const slide = document.createElement('div');
-        slide.className = 'swiper-slide';
-
-        const img = document.createElement('img');
-        img.className = 'mainImage';
-        img.src = item.src;
-        img.alt = item.caption || `Event ${idx+1}`;
-        
-        // Fallback if the image fails to load
-        img.onerror = () => {
-            img.onerror = null;
-            img.src = 'static/images/community_gathering.svg';
-        };
-        slide.appendChild(img);
-
-        swiperWrapper.appendChild(slide);
-    });
-    
-    // Update Swiper if it exists
-    setTimeout(() => {
-        if (window.swiperInstance) {
+    // Slides are static in HTML; only update if Swiper exists
+    if (window.swiperInstance) {
+        try {
             window.swiperInstance.update();
+        } catch (e) {
+            console.warn('Swiper update failed', e);
         }
-    }, 100);
+    }
 }
 
 // Admin helpers
@@ -285,7 +446,10 @@ function updateAdminUI() {
         }
         if (loginSec) loginSec.style.display = 'none';
         if (toolsSec) toolsSec.style.display = 'block';
-        if (sessionsAdmin) sessionsAdmin.style.display = 'block';
+        if (sessionsAdmin) {
+            sessionsAdmin.style.display = 'block';
+            console.log('Admin event controls are now visible');
+        }
     } else {
         if (adminControls) adminControls.style.display = 'none';
         if (loginLink) {
@@ -298,14 +462,22 @@ function updateAdminUI() {
         }
         if (loginSec) loginSec.style.display = 'block';
         if (toolsSec) toolsSec.style.display = 'none';
-        if (sessionsAdmin) sessionsAdmin.style.display = 'none';
+        if (sessionsAdmin) {
+            sessionsAdmin.style.display = 'none';
+            console.log('Admin event controls are hidden');
+        }
     }
     renderGallery();
+    renderEvents(); // Re-render events to remove/add delete buttons based on admin status
 }
 
 function handleLogoutClick(e) {
     e.preventDefault();
-    setAdminState(false);
+    if (confirm('Are you sure you want to logout?')) {
+        setAdminState(false);
+        closeAdminModal();
+        showModal('Logged Out', 'You have been successfully logged out. Admin controls are now hidden.');
+    }
 }
 
 // Admin Modal operations
@@ -434,8 +606,14 @@ function getEvents() {
 
 function saveEvents(list) {
     localStorage.setItem('events', JSON.stringify(list));
-    // Best-effort remote sync
-    remotePush('events', list);
+    // Best-effort remote sync with logging
+    remotePush('events', list).then(success => {
+        if (success) {
+            console.log('Events successfully synced to API');
+        } else {
+            console.warn('Failed to sync events to API');
+        }
+    });
 }
 
 function renderEvents() {
@@ -443,6 +621,17 @@ function renderEvents() {
     if (!container) return;
     const events = getEvents();
     container.innerHTML = '';
+    
+    if (events.length === 0) {
+        const emptyMsg = document.createElement('p');
+        emptyMsg.textContent = 'No events scheduled at the moment. Check back soon!';
+        emptyMsg.style.color = '#666';
+        emptyMsg.style.fontStyle = 'italic';
+        emptyMsg.style.padding = '2rem';
+        container.appendChild(emptyMsg);
+        return;
+    }
+    
     events.forEach(ev => {
         const card = document.createElement('div');
         card.className = 'event-card';
@@ -455,24 +644,35 @@ function renderEvents() {
         const actions = document.createElement('div');
         actions.className = 'event-actions';
 
-        // Join button (front shows only a join action, not the raw URL)
+        // Join button (visible to everyone)
         const join = document.createElement('a');
         join.className = 'join-btn';
         join.textContent = 'Join';
         join.href = ev.joinUrl || '#';
         join.target = '_blank';
+        join.rel = 'noopener noreferrer';
         actions.appendChild(join);
 
-        // Admin delete
+        // Admin delete (only add if currently admin - will be removed on re-render after logout)
         if (isAdmin()) {
             const del = document.createElement('button');
-            del.className = 'cta-btn';
-            del.textContent = 'Delete';
+            del.className = 'cta-btn delete-event-btn';
+            del.innerHTML = '<i class="bi bi-trash"></i> Delete';
             del.style.marginLeft = '0.5rem';
-            del.addEventListener('click', () => {
-                const list = getEvents().filter(x => x.id !== ev.id);
-                saveEvents(list);
-                renderEvents();
+            del.setAttribute('data-admin-only', 'true');
+            del.setAttribute('title', 'Remove this event');
+            del.addEventListener('click', async () => {
+                // Double-check admin status at click time
+                if (!isAdmin()) {
+                    showModal('Access Denied', 'You must be logged in as admin to delete events.');
+                    return;
+                }
+                if (confirm(`Are you sure you want to delete the event "${ev.title}"?\n\nThis action cannot be undone.`)) {
+                    const list = getEvents().filter(x => x.id !== ev.id);
+                    saveEvents(list);
+                    renderEvents();
+                    showModal('✓ Event Deleted', `The event "${ev.title}" has been successfully removed from the schedule.`);
+                }
             });
             actions.appendChild(del);
         }
@@ -486,7 +686,7 @@ function renderEvents() {
 // Admin event form
 const adminEventForm = document.getElementById('admin-event-form');
 if (adminEventForm) {
-    adminEventForm.addEventListener('submit', (e) => {
+    adminEventForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         if (!isAdmin()) return; // block non-admin
         const title = adminEventForm.querySelector('input[name="title"]').value.trim();
@@ -499,6 +699,8 @@ if (adminEventForm) {
         saveEvents(events);
         adminEventForm.reset();
         renderEvents();
+        // Show success message
+        showModal('Event Added', 'The event has been successfully added to the schedule.');
     });
 }
 
@@ -540,37 +742,5 @@ function joinCommunity() {
         'You will be redirected to our WhatsApp group. Welcome to our spiritual family! 🙏'
     );
 }
-
-// --- Swiper Gallery Initialization ---
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Swiper after DOM is loaded
-    setTimeout(() => {
-        if (typeof Swiper !== 'undefined') {
-            window.swiperInstance = new Swiper(`[unique-script-id="w-w-dm-id"] .mySwiper`, {
-                slidesPerView: 1.5,
-                centeredSlides: true,
-                spaceBetween: 5,
-                pagination: {
-                    el: `[unique-script-id="w-w-dm-id"] .swiper-pagination`,
-                    clickable: true,
-                },
-                loop: true,
-                autoplay: {
-                    delay: 2000, // 2 seconds
-                    disableOnInteraction: false, // Keep autoplay even after user interaction
-                },
-                navigation: {
-                    nextEl: `[unique-script-id="w-w-dm-id"] .swiper-button-nexts`,
-                    prevEl: `[unique-script-id="w-w-dm-id"] .swiper-button-prevs`,
-                },
-            });
-            console.log('Swiper initialized successfully');
-        } else {
-            console.warn('Swiper not loaded yet');
-        }
-    }, 500);
-});
-
-// (Removed duplicate DOMContentLoaded listener; initialization happens above)
 
 // End of main.js

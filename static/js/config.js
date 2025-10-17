@@ -1,16 +1,13 @@
-// Pluggable remote storage configuration
-// Set REMOTE_BACKEND to one of: 'none' | 'supabase' | 'firebase' | 'api'
-// For now default to 'none' (localStorage only). Fill the fields below to enable.
+// Static configuration - no backend needed
+// All data is stored locally in the browser
 window.AppConfig = {
-  REMOTE_BACKEND: 'api',
-  // If using Supabase
+  REMOTE_BACKEND: 'none', // Fully static, no API calls
   supabase: {
-    url: '', // e.g., 'https://YOUR-PROJECT.supabase.co'
+    url: '',
     anonKey: ''
   },
-  // If using a custom API (e.g., Vercel Functions)
   api: {
-  baseUrl: '/api', // served by Flask on the same origin
-    adminToken: '' // set this to your ADMIN_TOKEN for protected writes
+    baseUrl: '',
+    adminToken: ''
   }
 };

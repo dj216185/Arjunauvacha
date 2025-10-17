@@ -1012,9 +1012,8 @@
                     <li class="nav-item"><a class="nav-link text-white fw-500 px-3" href="#home">Home</a></li>
                     <li class="nav-item"><a class="nav-link text-white fw-500 px-3" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link text-white fw-500 px-3" href="#programs">Programs</a></li>
-                    <li class="nav-item"><a class="nav-link text-white fw-500 px-3" href="#sessions">Sessions</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-500 px-3" href="#wisdom">Divine Wisdom</a></li>
                     <li class="nav-item"><a class="nav-link text-white fw-500 px-3" href="#contact">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link text-white fw-500 px-3" href="#" id="login-link">Login</a></li>
                 </ul>
             </div>
         </div>
@@ -1055,21 +1054,15 @@
                         </a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a class="nav-link text-white d-flex align-items-center py-3 px-3 rounded-3 hover-bg" href="#sessions" data-bs-dismiss="offcanvas">
-                            <i class="bi bi-calendar-event-fill me-3 fs-5"></i>
-                            <span class="fw-500 fs-6">Upcoming Sessions</span>
+                        <a class="nav-link text-white d-flex align-items-center py-3 px-3 rounded-3 hover-bg" href="#wisdom" data-bs-dismiss="offcanvas">
+                            <i class="bi bi-star-fill me-3 fs-5"></i>
+                            <span class="fw-500 fs-6">Divine Wisdom</span>
                         </a>
                     </li>
                     <li class="nav-item mb-2">
                         <a class="nav-link text-white d-flex align-items-center py-3 px-3 rounded-3 hover-bg" href="#contact" data-bs-dismiss="offcanvas">
                             <i class="bi bi-telephone-fill me-3 fs-5"></i>
                             <span class="fw-500 fs-6">Connect With Us</span>
-                        </a>
-                    </li>
-                    <li class="nav-item mb-2">
-                        <a class="nav-link text-white d-flex align-items-center py-3 px-3 rounded-3 hover-bg" href="#" id="login-link-mobile" data-bs-dismiss="offcanvas">
-                            <i class="bi bi-person-circle me-3 fs-5"></i>
-                            <span class="fw-500 fs-6">Admin Login</span>
                         </a>
                     </li>
                 </ul>
@@ -1171,7 +1164,7 @@
             <div class="desktop_3" unique-script-id="w-w-dm-id">
                 <div class="responsive-container-block bigContainer">
                     <div class="responsive-container-block Container">
-                        <div class="swiper-container mySwiper">
+                        <div class="swiper-container swiper mySwiper">
                             <div class="btn">
                                 <div class="swiper-button-nexts">
                                     <img class="nextArrow" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/Vector.png" alt="Next">
@@ -1308,77 +1301,19 @@
         </div>
     </section>
 
-    <!-- Admin Modal (client-side only) -->
-    <div id="admin-modal" class="modal">
-        <div class="modal-content admin-modal-content">
-            <div id="admin-login-section">
-                <h3 class="modal-title">Admin Login</h3>
-                <form id="admin-login-form">
-                    <div class="admin-form-group">
-                        <label>Username</label>
-                        <input name="username" type="text" required />
-                        <label>Password</label>
-                        <input name="password" type="password" required />
-                        <div class="admin-error"></div>
-                        <div class="admin-form-actions">
-                            <button type="submit" class="cta-btn">Login</button>
-                            <button type="button" class="cta-btn" onclick="closeAdminModal()">Cancel</button>
-                        </div>
-                    </div>
-                </form>
-                <p class="modal-note">Default admin (client-side) credentials: <strong>admin / admin123</strong>.</p>
-            </div>
-
-            <div id="admin-tools-section" class="admin-only">
-                <hr />
-                <h4>Add Event Photo</h4>
-                <form id="admin-add-form">
-                    <div class="admin-form-group">
-                        <label>Caption</label>
-                        <input name="caption" type="text" placeholder="Event caption" />
-                        <label>Select Image</label>
-                        <select id="image-select" class="form-select">
-                            <option value="">Select an image...</option>
-                        </select>
-                        <div id="image-preview" class="upload-preview" aria-live="polite"></div>
-                        <small class="form-tip">Select from available images in the gallery collection.</small>
-                        <div class="admin-error"></div>
-                        <div class="admin-form-actions">
-                            <button type="submit" class="cta-btn">Add Photo</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    
-
-    <!-- Sessions Section -->
-    <section id="sessions" class="section-container">
+    <!-- Divine Wisdom Section -->
+    <section id="wisdom" class="section-container wisdom-section">
         <div class="container">
-            <h2 class="section-title">Upcoming Sessions</h2>
-            <div class="about-content">
-                <div class="card">
-                    <h3>🗓️ Scheduled Programs</h3>
-                    <p>This is where our dynamic schedule appears.</p>
-                    <div id="admin-events-controls">
-                        <h4>Add Event (Admin)</h4>
-            <form id="admin-event-form">
-                            <div class="admin-form-group">
-                <label for="event-title">Event Title</label>
-                <input id="event-title" name="title" type="text" placeholder="Community Gathering" />
-                <label for="event-datetime">Date & Time</label>
-                <input id="event-datetime" name="datetime" type="datetime-local" placeholder="YYYY-MM-DD HH:MM" title="Select date and time" />
-                <label for="event-join">Join URL (meeting link)</label>
-                <input id="event-join" name="joinUrl" type="url" placeholder="https://zoom.example/..." />
-                                <div class="admin-form-actions">
-                                    <button type="submit" class="cta-btn">Add Event</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div id="events-list"></div>
+            <h2 class="section-title">Divine Wisdom from Bhagavad Gita</h2>
+            <div class="wisdom-content">
+                <div class="quote-card">
+                    <div class="quote-icon">📿</div>
+                    <div id="quote-sanskrit" class="quote-sanskrit"></div>
+                    <div id="quote-translation" class="quote-translation"></div>
+                    <div id="quote-chapter" class="quote-chapter"></div>
+                    <button onclick="nextQuote()" class="cta-btn quote-btn">
+                        <i class="bi bi-arrow-repeat"></i> Next Teaching
+                    </button>
                 </div>
             </div>
         </div>
@@ -1415,11 +1350,11 @@
         <p>🕉️ May Lord Krishna's blessings be with you always 🕉️</p>
     </footer>
 
-    <script src="static/js/config.js"></script>
-    <script src="static/js/main.js"></script>
+    <!-- Swiper JS should load before our main.js to avoid race conditions -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="static/js/config.js"></script>
+    <script src="static/js/main.js"></script>
 </body>
 </html>
